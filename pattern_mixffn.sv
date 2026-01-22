@@ -300,8 +300,8 @@ module PATTERN (
             // 1. 檢查是否達到了 "終止條件"
             // (黃金檔案已讀完 且 DUT 不再輸出)
 
-            //if (golden_file_is_done && !out_valid) begin
-            if(test_count>=2048)begin
+            if (golden_file_is_done) begin
+            //if(test_count>=2048)begin
                 $display("-------------------------------------------------");
                 $display("[%0t] PATTERN: 偵測到最後一筆輸出已比對完成。", $time);
                 
