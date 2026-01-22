@@ -1,0 +1,2 @@
+ #vcs -sverilog testbed_fc1.sv ~icsslRA01/CBDK/CBDK_IC_Contest_v2.5/Verilog/tsmc13_neg.v +neg_tchk -R -full64 -debug_access+all +define+GATE +v2k -P /usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/novas.tab /usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/pli.a
+  vcs -sverilog testbed_fc2.sv ~icsslRA01/CBDK/CBDK_IC_Contest_v2.5/Verilog/tsmc13_neg.v +neg_tchk -R -full64 -debug_access+all +define+GATE +v2k -P /usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/novas.tab /usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/pli.a

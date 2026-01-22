@@ -1,0 +1,9 @@
+{"vcs1":{"timestamp_begin":1765116106.705810423, "rt":3.43, "ut":2.56, "st":0.29}}
+{"vcselab":{"timestamp_begin":1765116110.239254152, "rt":0.88, "ut":0.28, "st":0.21}}
+{"link":{"timestamp_begin":1765116111.215217587, "rt":0.52, "ut":0.16, "st":0.21}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1765116106.100075799}
+{"VCS_COMP_START_TIME": 1765116106.100075799}
+{"VCS_COMP_END_TIME": 1765165022.942279908}
+{"VCS_USER_OPTIONS": "-sverilog testbed_dwconv.sv -R -full64 -debug_access+all +v2k +define+RTL -P /usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/novas.tab /usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/pli.a"}
+{"vcs1": {"peak_mem": 332788}}
+{"stitch_vcselab": {"peak_mem": 231548}}

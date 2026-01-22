@@ -1,0 +1,367 @@
+wvRestoreSignal -win $_nWave1 \
+           "/RAID2/LAB/icssl/icsslRA21/Mix_ffn/dwconv/signal.rc" \
+           -overWriteAutoAlias on -appendSignals on
+wvResizeWindow -win $_nWave1 0 23 1468 820
+wvGoToTime -win $_nWave1 455795000
+wvSetCursor -win $_nWave1 455814329.670562 -snap {("G1" 6)}
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvResizeWindow -win $_nWave1 0 23 1536 889
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvSetCursor -win $_nWave1 124015.132949 -snap {("G5" 1)}
+wvResizeWindow -win $_nWave1 0 23 1536 889
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvScrollDown -win $_nWave1 0
+wvGetSignalOpen -win $_nWave1
+wvGetSignalSetScope -win $_nWave1 "/TESTBED/I_DUT/dw"
+wvSetPosition -win $_nWave1 {("G5" 11)}
+wvSetPosition -win $_nWave1 {("G5" 11)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/TESTBED/I_DUT/clk} \
+{/TESTBED/I_DUT/rst_n} \
+{/TESTBED/I_DUT/state\[1:0\]} \
+{/TESTBED/I_DUT/in_valid} \
+{/TESTBED/I_DUT/out_valid} \
+{/TESTBED/I_DUT/sum\[20:0\]} \
+{/TESTBED/I_DUT/in_data\[15:0\]} \
+{/TESTBED/I_DUT/weight\[143:0\]} \
+{/TESTBED/I_DUT/bias\[15:0\]} \
+{/TESTBED/I_DUT/dw/bias_reg\[0:1\]} \
+{/TESTBED/I_DUT/dw/bias_reg\[0\]\[15:0\]} \
+{/TESTBED/I_DUT/dw/bias_reg\[1\]\[15:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/TESTBED/I_DUT/in_count\[8:0\]} \
+{/TESTBED/I_DUT/conv_col\[7:0\]} \
+{/TESTBED/I_DUT/conv_row\[6:0\]} \
+{/TESTBED/I_DUT/in_col\[7:0\]} \
+{/TESTBED/I_DUT/in_row\[6:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/TESTBED/I_DUT/dw/col_reg\[7:0\]} \
+{/TESTBED/I_DUT/dw/row_reg\[6:0\]} \
+{/TESTBED/I_DUT/conv_flag} \
+{/TESTBED/I_DUT/conv_col_n\[7:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/TESTBED/I_DUT/dw/in_data_0\[15:0\]} \
+{/TESTBED/I_DUT/dw/in_data_1\[15:0\]} \
+{/TESTBED/I_DUT/dw/in_data_2\[15:0\]} \
+{/TESTBED/I_DUT/dw/in_data_176\[15:0\]} \
+{/TESTBED/I_DUT/dw/in_data_177\[15:0\]} \
+{/TESTBED/I_DUT/dw/in_data_178\[15:0\]} \
+{/TESTBED/I_DUT/dw/in_data_352\[15:0\]} \
+{/TESTBED/I_DUT/dw/in_data_353\[15:0\]} \
+{/TESTBED/I_DUT/dw/in_data_354\[15:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/TESTBED/I_DUT/dw/weight_reg\[0:8\]} \
+{/TESTBED/I_DUT/dw/weight_reg\[0\]\[15:0\]} \
+{/TESTBED/I_DUT/dw/weight_reg\[1\]\[15:0\]} \
+{/TESTBED/I_DUT/dw/weight_reg\[2\]\[15:0\]} \
+{/TESTBED/I_DUT/dw/weight_reg\[3\]\[15:0\]} \
+{/TESTBED/I_DUT/dw/weight_reg\[4\]\[15:0\]} \
+{/TESTBED/I_DUT/dw/weight_reg\[5\]\[15:0\]} \
+{/TESTBED/I_DUT/dw/weight_reg\[6\]\[15:0\]} \
+{/TESTBED/I_DUT/dw/weight_reg\[7\]\[15:0\]} \
+{/TESTBED/I_DUT/dw/weight_reg\[8\]\[15:0\]} \
+{/TESTBED/I_DUT/dw/bias_reg\[0:1\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+{/TESTBED/I_DUT/dw/mul\[0:8\]} \
+{/TESTBED/I_DUT/dw/mul\[0\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul\[1\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul\[2\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul\[3\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul\[4\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul\[5\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul\[6\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul\[7\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul\[8\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul_closed\[0:8\]} \
+{/TESTBED/I_DUT/dw/mul_closed\[0\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul_closed\[1\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul_closed\[2\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul_closed\[3\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul_closed\[4\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul_closed\[5\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul_closed\[6\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul_closed\[7\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul_closed\[8\]\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G7" \
+{/TESTBED/I_DUT/dw/bias_extended\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G8" \
+}
+wvSelectSignal -win $_nWave1 {( "G5" 11 )} 
+wvSetPosition -win $_nWave1 {("G5" 11)}
+wvSetPosition -win $_nWave1 {("G5" 11)}
+wvSetPosition -win $_nWave1 {("G5" 11)}
+wvAddSignal -win $_nWave1 -clear
+wvAddSignal -win $_nWave1 -group {"G1" \
+{/TESTBED/I_DUT/clk} \
+{/TESTBED/I_DUT/rst_n} \
+{/TESTBED/I_DUT/state\[1:0\]} \
+{/TESTBED/I_DUT/in_valid} \
+{/TESTBED/I_DUT/out_valid} \
+{/TESTBED/I_DUT/sum\[20:0\]} \
+{/TESTBED/I_DUT/in_data\[15:0\]} \
+{/TESTBED/I_DUT/weight\[143:0\]} \
+{/TESTBED/I_DUT/bias\[15:0\]} \
+{/TESTBED/I_DUT/dw/bias_reg\[0:1\]} \
+{/TESTBED/I_DUT/dw/bias_reg\[0\]\[15:0\]} \
+{/TESTBED/I_DUT/dw/bias_reg\[1\]\[15:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G2" \
+{/TESTBED/I_DUT/in_count\[8:0\]} \
+{/TESTBED/I_DUT/conv_col\[7:0\]} \
+{/TESTBED/I_DUT/conv_row\[6:0\]} \
+{/TESTBED/I_DUT/in_col\[7:0\]} \
+{/TESTBED/I_DUT/in_row\[6:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G3" \
+{/TESTBED/I_DUT/dw/col_reg\[7:0\]} \
+{/TESTBED/I_DUT/dw/row_reg\[6:0\]} \
+{/TESTBED/I_DUT/conv_flag} \
+{/TESTBED/I_DUT/conv_col_n\[7:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G4" \
+{/TESTBED/I_DUT/dw/in_data_0\[15:0\]} \
+{/TESTBED/I_DUT/dw/in_data_1\[15:0\]} \
+{/TESTBED/I_DUT/dw/in_data_2\[15:0\]} \
+{/TESTBED/I_DUT/dw/in_data_176\[15:0\]} \
+{/TESTBED/I_DUT/dw/in_data_177\[15:0\]} \
+{/TESTBED/I_DUT/dw/in_data_178\[15:0\]} \
+{/TESTBED/I_DUT/dw/in_data_352\[15:0\]} \
+{/TESTBED/I_DUT/dw/in_data_353\[15:0\]} \
+{/TESTBED/I_DUT/dw/in_data_354\[15:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G5" \
+{/TESTBED/I_DUT/dw/weight_reg\[0:8\]} \
+{/TESTBED/I_DUT/dw/weight_reg\[0\]\[15:0\]} \
+{/TESTBED/I_DUT/dw/weight_reg\[1\]\[15:0\]} \
+{/TESTBED/I_DUT/dw/weight_reg\[2\]\[15:0\]} \
+{/TESTBED/I_DUT/dw/weight_reg\[3\]\[15:0\]} \
+{/TESTBED/I_DUT/dw/weight_reg\[4\]\[15:0\]} \
+{/TESTBED/I_DUT/dw/weight_reg\[5\]\[15:0\]} \
+{/TESTBED/I_DUT/dw/weight_reg\[6\]\[15:0\]} \
+{/TESTBED/I_DUT/dw/weight_reg\[7\]\[15:0\]} \
+{/TESTBED/I_DUT/dw/weight_reg\[8\]\[15:0\]} \
+{/TESTBED/I_DUT/dw/bias_reg\[0:1\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G6" \
+{/TESTBED/I_DUT/dw/mul\[0:8\]} \
+{/TESTBED/I_DUT/dw/mul\[0\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul\[1\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul\[2\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul\[3\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul\[4\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul\[5\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul\[6\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul\[7\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul\[8\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul_closed\[0:8\]} \
+{/TESTBED/I_DUT/dw/mul_closed\[0\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul_closed\[1\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul_closed\[2\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul_closed\[3\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul_closed\[4\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul_closed\[5\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul_closed\[6\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul_closed\[7\]\[31:0\]} \
+{/TESTBED/I_DUT/dw/mul_closed\[8\]\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G7" \
+{/TESTBED/I_DUT/dw/bias_extended\[31:0\]} \
+}
+wvAddSignal -win $_nWave1 -group {"G8" \
+}
+wvSelectSignal -win $_nWave1 {( "G5" 11 )} 
+wvSetPosition -win $_nWave1 {("G5" 11)}
+wvGetSignalClose -win $_nWave1
+wvSetRadix -win $_nWave1 -2Com
+wvSetCursor -win $_nWave1 125649.531156 -snap {("G5" 11)}
+wvSetCursor -win $_nWave1 136311.970571 -snap {("G5" 11)}
+wvSetCursor -win $_nWave1 125440.463716 -snap {("G5" 11)}
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvSetCursor -win $_nWave1 134848.498495 -snap {("G5" 9)}
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollUp -win $_nWave1 1
+wvScrollDown -win $_nWave1 1
+wvExit

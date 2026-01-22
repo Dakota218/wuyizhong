@@ -1,0 +1,133 @@
+0 
+26
++define+RTL
++v2k
+-Mamsrun=
+-Masflags=
+-Mcc=gcc
+-Mcfl= -pipe -fPIC -O -I/usr/cad/synopsys/vcs/2022.06/include
+-Mcplusplus=g++
+-Mcrt0=
+-Mcrtn=
+-Mcsrc=
+-Mexternalobj=
+-Mldflags= -rdynamic
+-Mobjects= /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvirsim.so /usr/cad/synopsys/vcs/2022.06/linux64/lib/liberrorinf.so /usr/cad/synopsys/vcs/2022.06/linux64/lib/libsnpsmalloc.so /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvfs.so
+-Mout=simv
+-Msaverestoreobj=/usr/cad/synopsys/vcs/2022.06/linux64/lib/vcs_save_restore_new.o
+-Msyslibs=-ldl
+-Mvcsaceobjs=
+-Mxcflags= -pipe -fPIC -I/usr/cad/synopsys/vcs/2022.06/include
+-Mxllcflags=
+-Xvcs_run_simv=1
+-full64
+-gen_obj
+-picarchive
+-sverilog
+/usr/cad/synopsys/vcs/2022.06/linux64/bin/vcs1
+testbed_dwconv.sv
+90
+mraarch=linux_64
+installdir=/RAID2/cad/synopsys/hspice/2020.03-sp2-2/hspice
+XRDP_SOCKET_PATH=/run/xrdp
+XRDP_SESSION=1
+XRDP_PULSE_SOURCE_SOCKET=xrdp_chansrv_audio_in_socket_16
+XRDP_PULSE_SINK_SOCKET=xrdp_chansrv_audio_out_socket_16
+XMODIFIERS=@im=ibus
+XLOCALEDIR=/usr/cad/synopsys/icc2/2021.06-sp5//etc/locale
+XDG_SESSION_ID=c10
+XDG_RUNTIME_DIR=/run/user/18956
+XDG_MENU_PREFIX=gnome-
+XDG_DATA_DIRS=/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+XDG_CURRENT_DESKTOP=GNOME
+VTE_VERSION=5204
+VMR_MODE_FLAG=64
+VERDI_HOME=/usr/cad/synopsys/verdi/2019.06/
+VENDOR=unknown
+VC_STATIC_HOME=/usr/cad/synopsys/vc_formal/cur/
+VCS_PATHMAP_PRELOAD_DONE=1
+VCS_MX_HOME_INTERNAL=1
+VCS_MODE_FLAG=64
+VCS_HOME=/usr/cad/synopsys/vcs/2022.06
+VCS_EXEC_DONE=1
+VCS_DEPTH=0
+VCS_CC=gcc
+VCS_ARG_ADDED_FOR_TMP=1
+VCS_ARCH=linux64
+UNAME=/bin/uname
+TOOL_HOME=/usr/cad/synopsys/vcs/2022.06/linux64
+TMIARCH=RH_64
+SYN_MAN_DIR=/usr/cad/synopsys/star-rcxt/2019.12-sp5-3//starrc/man
+SYNOPSYS_NCX_ROOT=/usr/cad/synopsys/star-rcxt/2019.12-sp5-3/
+SYNOPSYS_LC_ROOT=/cad/synopsys/lc/cur
+SYNOPSYS=/usr/cad/synopsys/synthesis/cur/
+SSH_AUTH_SOCK=/run/user/18956/keyring/ssh
+SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+SSH_AGENT_PID=238794
+SPAPI_AHDL_INCLUDE=/RAID2/cad/synopsys/hspice/2020.03-sp2-2/hspice/include
+SNPS_VCS_CLANG_PATH=/usr/cad/synopsys/vcs/2022.06/linux64/clang
+SNPS_PLATFORM=linux64
+SNPS_INTERNAL_VCS_LINUX_OS=linux
+SNPS_64=1
+SHLIB_PATH=/usr/cad/synopsys/verdi/2019.06//etc/lib/libstdc++/LINUX64/:/usr/cad/synopsys/verdi/2019.06//share/PLI/lib/LINUX64/:/usr/cad/synopsys/verdi/2019.06//share/PLI/VCS/LINUX64/:
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/238793,unix/unix:/tmp/.ICE-unix/238793
+SCRNAME=vcs
+SCRIPT_NAME=vcs
+QT_IM_MODULE=ibus
+QT_GRAPHICSSYSTEM_CHECKED=1
+QTLIB=/usr/lib64/qt-3.3/lib
+QTINC=/usr/lib64/qt-3.3/include
+QTDIR=/usr/lib64/qt-3.3
+PULSE_SCRIPT=/etc/xrdp/pulse/default.pa
+POWERVIEW_64=1
+OVA_UUM=0
+OSTYPE=linux
+MGLS_LICENSE_FILE=1717@lshc
+MGC_TMPDIR=/tmp
+MGC_LOCATION_MAP=NO_MAP
+MGC_HOME=/usr/cad/mentor/calibre/aoi_cal_2019.2_26.18/
+Laker_TCL_ToolBox=1
+Laker_TCL_L3=1
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+LC_ALL=C
+JGOLD_dir=/RAID2/eda/jasper_2021.03/
+IMSETTINGS_MODULE=none
+IMSETTINGS_INTEGRATE_DESKTOP=yes
+ICV_HOME_DIR=/usr/cad/synopsys/icvalidator/2021.06-sp2/
+HSP_SIGMA_AMP=/RAID2/cad/synopsys/hspice/2020.03-sp2-2/hspice/linux64/python/Omega/Omega
+HSP_HOME=/RAID2/cad/synopsys/hspice/2020.03-sp2-2/hspice
+HSP_GCC_VERSION=7.3.0
+HSP_GCC=/RAID2/cad/synopsys/hspice/2020.03-sp2-2/hspice/GNU/linux64/gcc/bin/gcc -m64 
+HOSTTYPE=x86_64-linux
+HISTCONTROL=ignoredups
+GROUP=ea25vlsiintro
+GNOME_TERMINAL_SERVICE=:1.104
+GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/997b761c_116c_4821_a0de_8edf85edbd1c
+GNOME_SHELL_SESSION_MODE=classic
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+FINEWAVE_64=1
+FINESIM_64=1
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-rQBKEmzG0y,guid=21aacc2beac2985dbe7f9bf168e35e95
+COLORTERM=truecolor
+CMIARCH=RH_64
+CDS_Netlisting_Mode=Analog
+CDS_LOAD_ENV=CSF
+CDS_AUTO_64BIT=ALL
+CDSHOME=/usr/cad/cadence/IC/IC_06.18.250
+CDPL_HOME=/RAID2/cad/synopsys/hspice/2020.03-sp2-2/hspice/cdpl
+CALIBRE_HOME=/usr/cad/mentor/calibre/aoi_cal_2019.2_26.18/
+ARCH=linux64
+0
+0
+4
+1769070701 dwconv_channel.sv
+1769070701 dwconv.sv
+1769070701 pattern_dwconv.sv
+1769070701 testbed_dwconv.sv
+4
+1654054205 /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvirsim.so
+1654053585 /usr/cad/synopsys/vcs/2022.06/linux64/lib/liberrorinf.so
+1654053489 /usr/cad/synopsys/vcs/2022.06/linux64/lib/libsnpsmalloc.so
+1654053565 /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvfs.so
+1769071074 simv.daidir
+-1 partitionlib

@@ -1,0 +1,84 @@
+*** Using c compiler gcc instead of cc ...
+                         Chronologic VCS (TM)
+         Version T-2022.06_Full64 -- Thu Jan 22 16:37:47 2026
+
+                    Copyright (c) 1991 - 2022 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+
+Parsing design file 'testbed_dwconv.sv'
+Parsing included file 'pattern_dwconv.sv'.
+
+Warning-[RVOSFD] Return value discarded
+pattern_dwconv.sv, 226
+  System function '$fscanf' is invoked as task, its return value is discarded.
+  "pattern_dwconv.sv", 226
+  Source info:                     $fscanf(golden_file, "%h", expected_sum);
+
+Back to file 'testbed_dwconv.sv'.
+Parsing included file 'dwconv.sv'.
+Back to file 'testbed_dwconv.sv'.
+Parsing included file 'dwconv_channel.sv'.
+Back to file 'testbed_dwconv.sv'.
+Top Level Modules:
+       TESTBED
+TimeScale is 1 ns / 1 ps
+
+Warning-[PCWM-W] Port connection width mismatch
+testbed_dwconv.sv, 79
+"dwconv I_DUT( .clk (clk),  .rst_n (rst_n),  .in_valid (in_valid),  .in_data (in_data),  .weight (weight),  .bias (bias),  .out_valid (out_valid),  .sum (sum));"
+  The following 16-bit expression is connected to 21-bit port "sum" of module 
+  "dwconv", instance "I_DUT".
+  Expression: sum
+  Instantiated module defined at: "dwconv.sv", 1
+  Use +lint=PCWM for more details.
+
+
+Warning-[PCWM-W] Port connection width mismatch
+testbed_dwconv.sv, 91
+"PATTERN I_PATTERN( .clk (clk),  .rst_n (rst_n),  .in_valid (in_valid),  .in_data (in_data),  .weight (weight),  .bias (bias),  .out_valid (out_valid),  .sum (sum));"
+  The following 16-bit expression is connected to 21-bit port "sum" of module 
+  "PATTERN", instance "I_PATTERN".
+  Expression: sum
+  Instantiated module defined at: "pattern_dwconv.sv", 3
+  Use +lint=PCWM for more details.
+
+Starting vcs inline pass...
+
+1 module and 0 UDP read.
+recompiling module TESTBED
+rm -f _cuarc*.so _csrc*.so pre_vcsobj_*.so share_vcsobj_*.so
+if [ -x ../simv ]; then chmod a-x ../simv; fi
+g++  -o ../simv      -rdynamic  -Wl,-rpath='$ORIGIN'/simv.daidir -Wl,-rpath=./simv.daidir -Wl,-rpath=/usr/cad/synopsys/vcs/2022.06/linux64/lib -L/usr/cad/synopsys/vcs/2022.06/linux64/lib  -Wl,-rpath-link=./  /usr/lib64/libnuma.so.1   objs/amcQw_d.o   _36148_archive_1.so  SIM_l.o      rmapats_mop.o rmapats.o rmar.o rmar_nd.o  rmar_llvm_0_1.o rmar_llvm_0_0.o           -lvirsim -lerrorinf -lsnpsmalloc -lvfs    -lvcsnew -lsimprofile -luclinative /usr/cad/synopsys/vcs/2022.06/linux64/lib/vcs_tls.o   -Wl,-whole-archive  -lvcsucli    -Wl,-no-whole-archive        _vcs_pli_stub_.o   /usr/cad/synopsys/vcs/2022.06/linux64/lib/vcs_save_restore_new.o -ldl  -lc -lm -lpthread -ldl 
+../simv up to date
+Chronologic VCS simulator copyright 1991-2022
+Contains Synopsys proprietary information.
+Compiler version T-2022.06_Full64; Runtime version T-2022.06_Full64;  Jan 22 16:37 2026
+[0] PATTERN: 測試激勵 (Burst Mode) 已啟動...
+
+Warning-[STASKW_CO] Cannot open file
+pattern_dwconv.sv, 62
+  The file '../files/dwconv_weights_hex.txt' could not be opened. No such file
+  or directory.
+  Please ensure that the file exists with proper permissions.
+
+錯誤：無法開啟 weights_hex.txt
+$finish called from file "pattern_dwconv.sv", line 63.
+$finish at simulation time                    0
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 0 ps
+CPU Time:      0.280 seconds;       Data structure size:   1.1Mb
+Thu Jan 22 16:37:54 2026
+CPU time: 4.039 seconds to compile + .830 seconds to elab + .521 seconds to link + .320 seconds in simulation

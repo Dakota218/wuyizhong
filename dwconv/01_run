@@ -1,0 +1,12 @@
+ #vcs -sverilog testbed_dwconv.sv -R -full64 -debug_access+all +v2k +define+RTL -P /usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/novas.tab /usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/pli.a
+ #vcs -sverilog testbed_dwconv.sv -R -full64 -debug_access+all +v2k +define+RTL -P /usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/novas.tab /usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/pli.a
+
+#  #!/bin/bash
+# vcs -sverilog testbed_dwconv.sv -R -full64 -debug_access+all +v2k +define+RTL \
+# -P /usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/novas.tab \
+# /usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/pli.a \
+# 2>&1 | tee run.log
+
+#!/bin/bash
+vcs -sverilog testbed_dwconv.sv -R -full64 +v2k +define+RTL \
+2>&1 | tee run.log

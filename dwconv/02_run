@@ -1,0 +1,2 @@
+dc_shell -f fc1_dc_syn.tcl | tee syn.log
+#dc_shell -f fc2_dc_syn.tcl | tee syn.log
