@@ -122,12 +122,12 @@ ARCH=linux64
 4
 1769070701 dwconv_channel.sv
 1769070701 dwconv.sv
-1769070701 pattern_dwconv.sv
+1769141681 pattern_dwconv.sv
 1769070701 testbed_dwconv.sv
 4
 1654054205 /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvirsim.so
 1654053585 /usr/cad/synopsys/vcs/2022.06/linux64/lib/liberrorinf.so
 1654053489 /usr/cad/synopsys/vcs/2022.06/linux64/lib/libsnpsmalloc.so
 1654053565 /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvfs.so
-1769071074 simv.daidir
+1769169661 simv.daidir
 -1 partitionlib

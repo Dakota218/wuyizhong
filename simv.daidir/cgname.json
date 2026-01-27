@@ -1,0 +1,50 @@
+{
+    "std": [
+        "std",
+        "reYIK",
+        "module",
+        1
+    ],
+    "PATTERN": [
+        "PATTERN",
+        "ThTta",
+        "module",
+        2
+    ],
+    "dwconv": [
+        "dwconv",
+        "BHPNL",
+        "module",
+        3
+    ],
+    "fc1_column": [
+        "fc1_column",
+        "r63gk",
+        "module",
+        4
+    ],
+    "fc2_0000": [
+        "fc2_0000",
+        "LmaUV",
+        "module",
+        5
+    ],
+    "fc2_column": [
+        "fc2_column",
+        "TUkQW",
+        "module",
+        6
+    ],
+    "TESTBED": [
+        "TESTBED",
+        "TAUdR",
+        "module",
+        7
+    ],
+    "...MASTER...": [
+        "SIM",
+        "amcQw",
+        "module",
+        8
+    ]
+}

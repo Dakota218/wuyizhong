@@ -1,0 +1,10 @@
+/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/dwconv.sv
+/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/dwconv_channel.sv
+/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/fc1.sv
+/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/fc1_column.sv
+/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/fc2.sv
+/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/fc2_column.sv
+/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/gelu_lut.sv
+/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/mixffn.sv
+/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/pattern_mixffn.sv
+/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/testbed_mixffn.sv
