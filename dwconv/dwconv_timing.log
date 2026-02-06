@@ -1,0 +1,32 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : dwconv
+Version: T-2022.03
+Date   : Wed Jan 28 10:28:50 2026
+****************************************
+
+Operating Conditions: nom_pvt   Library: dw_foundation.sldb
+Wire Load Model Mode: top
+
+  Startpoint: dw/out_valid_reg
+              (rising edge-triggered flip-flop)
+  Endpoint: out_valid (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  dw/out_valid_reg/clocked_on (**SEQGEN**)                0.00       0.00 r
+  dw/out_valid_reg/Q (**SEQGEN**)                         0.00       0.00 r
+  dw/out_valid (dwconv_channel)                           0.00       0.00 r
+  out_valid (out)                                         0.00       0.00 r
+  data arrival time                                                  0.00
+  --------------------------------------------------------------------------
+  (Path is unconstrained)
+
+
+1

@@ -1,0 +1,209 @@
+
+                           Design Compiler Graphical 
+                                 DC Ultra (TM)
+                                  DFTMAX (TM)
+                              Power Compiler (TM)
+                                 DesignWare (R)
+                                 DC Expert (TM)
+                               Design Vision (TM)
+                               HDL Compiler (TM)
+                               VHDL Compiler (TM)
+                                  DFT Compiler
+                               Design Compiler(R)
+
+                 Version T-2022.03 for linux64 - Feb 22, 2022 
+
+                    Copyright (c) 1988 - 2022 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+Initializing...
+#Read All Files
+#read_file -format verilog  CONVEX.v
+#read_file -format sverilog  fc1.sv
+analyze -format sverilog dwconv.sv
+Running PRESTO HDLC
+Compiling source file ./dwconv.sv
+Presto compilation completed successfully.
+Warning: Can't read link_library file 'your_library.db'. (UID-3)
+1
+analyze -format sverilog dwconv_channel.sv
+Running PRESTO HDLC
+Compiling source file ./dwconv_channel.sv
+Presto compilation completed successfully.
+Warning: Can't read link_library file 'your_library.db'. (UID-3)
+1
+elaborate dwconv
+Loading db file '/usr/cad/synopsys/synthesis/2022.03/libraries/syn/gtech.db'
+Loading db file '/usr/cad/synopsys/synthesis/2022.03/libraries/syn/standard.sldb'
+  Loading link library 'gtech'
+Warning: Can't read link_library file 'your_library.db'. (UID-3)
+Running PRESTO HDLC
+
+Statistics for case statements in always block at line 58 in file
+	'./dwconv.sv'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            60            |    auto/auto     |
+===============================================
+
+Statistics for case statements in always block at line 73 in file
+	'./dwconv.sv'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            79            |     no/auto      |
+===============================================
+
+Inferred memory devices in process
+	in routine dwconv line 98 in file
+		'./dwconv.sv'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|    out_count_reg    | Flip-flop |   8   |  Y  | N  | Y  | N  | N  | N  | N  |
+|      state_reg      | Flip-flop |   2   |  Y  | N  | Y  | N  | N  | N  | N  |
+|     in_row_reg      | Flip-flop |   7   |  Y  | N  | Y  | N  | N  | N  | N  |
+|     in_col_reg      | Flip-flop |   8   |  Y  | N  | Y  | N  | N  | N  | N  |
+|    conv_row_reg     | Flip-flop |   7   |  Y  | N  | Y  | N  | N  | N  | N  |
+|    conv_col_reg     | Flip-flop |   8   |  Y  | N  | Y  | N  | N  | N  | N  |
+|    in_count_reg     | Flip-flop |   9   |  Y  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully. (dwconv)
+Elaborated 1 design.
+Current design is now 'dwconv'.
+Warning: Can't read link_library file 'your_library.db'. (UID-3)
+Information: Building the design 'dwconv_channel'. (HDL-193)
+Warning:  ./dwconv_channel.sv:51: unsigned to signed assignment occurs. (VER-318)
+Warning:  ./dwconv_channel.sv:57: signed to unsigned part selection occurs. (VER-318)
+Warning:  ./dwconv_channel.sv:138: signed to unsigned part selection occurs. (VER-318)
+
+Statistics for case statements in always block at line 86 in file
+	'./dwconv_channel.sv'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|            87            |    auto/auto     |
+===============================================
+
+Inferred memory devices in process
+	in routine dwconv_channel line 110 in file
+		'./dwconv_channel.sv'.
+=================================================================================
+|    Register Name    |   Type    |  Width  | Bus | MB | AR | AS | SR | SS | ST |
+=================================================================================
+|       sum_reg       | Flip-flop |   21    |  Y  | N  | Y  | N  | N  | N  | N  |
+|    bias_reg_reg     | Flip-flop |   32    |  Y  | N  | Y  | N  | N  | N  | N  |
+|     col_reg_reg     | Flip-flop |    8    |  Y  | N  | Y  | N  | N  | N  | N  |
+|    out_valid_reg    | Flip-flop |    1    |  N  | N  | Y  | N  | N  | N  | N  |
+|       mul_reg       | Flip-flop |   261   |  Y  | N  | Y  | N  | N  | N  | N  |
+|   weight_reg_reg    | Flip-flop |   144   |  Y  | N  | Y  | N  | N  | N  | N  |
+|   in_data_reg_reg   | Flip-flop | 1450000 |  Y  | N  | Y  | N  | N  | N  | N  |
+=================================================================================
+Warning:  ./dwconv_channel.sv:27: Netlist for always_comb block is empty. (ELAB-982)
+Presto compilation completed successfully. (dwconv_channel)
+1
+current_design dwconv
+Current design is 'dwconv'.
+{dwconv}
+link
+Warning: Can't read link_library file 'your_library.db'. (UID-3)
+
+  Linking design 'dwconv'
+  Using the following designs and libraries:
+  --------------------------------------------------------------------------
+  * (2 designs)               /RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/dwconv/dwconv.db, etc
+
+1
+#Setting Clock Constraints
+source -echo -verbose dwconv.sdc
+Error: could not open script file "dwconv.sdc" (CMD-015)
+set_fix_hold                [all_clocks]
+Error: Value for list '<clock_list>' must have 1 elements. (CMD-036)
+0
+check_design
+ 
+****************************************
+check_design summary:
+Version:     T-2022.03
+Date:        Wed Jan 28 10:14:43 2026
+****************************************
+
+                   Name                                            Total
+--------------------------------------------------------------------------------
+Inputs/Outputs                                                      7
+    Unconnected ports (LINT-28)                                     7
+
+Cells                                                               6
+    Cells do not drive (LINT-1)                                     6
+--------------------------------------------------------------------------------
+
+Warning: In design 'dwconv', cell 'B_15' does not drive any nets. (LINT-1)
+Warning: In design 'dwconv', cell 'C11325' does not drive any nets. (LINT-1)
+Warning: In design 'dwconv', cell 'C11328' does not drive any nets. (LINT-1)
+Warning: In design 'dwconv', cell 'C11340' does not drive any nets. (LINT-1)
+Warning: In design 'dwconv', cell 'C11356' does not drive any nets. (LINT-1)
+Warning: In design 'dwconv_channel', cell 'C2909610' does not drive any nets. (LINT-1)
+Warning: In design 'dwconv_channel', port 'row[6]' is not connected to any nets. (LINT-28)
+Warning: In design 'dwconv_channel', port 'row[5]' is not connected to any nets. (LINT-28)
+Warning: In design 'dwconv_channel', port 'row[4]' is not connected to any nets. (LINT-28)
+Warning: In design 'dwconv_channel', port 'row[3]' is not connected to any nets. (LINT-28)
+Warning: In design 'dwconv_channel', port 'row[2]' is not connected to any nets. (LINT-28)
+Warning: In design 'dwconv_channel', port 'row[1]' is not connected to any nets. (LINT-28)
+Warning: In design 'dwconv_channel', port 'row[0]' is not connected to any nets. (LINT-28)
+1
+set high_fanout_net_threshold 0
+0
+uniquify
+1
+set_fix_multiple_port_nets -all -buffer_constants [get_designs *]
+1
+#set_max_area 0
+#Synthesis all design
+#compile -map_effort high -area_effort high
+#compile -map_effort high -area_effort high -inc
+compile_ultra -incremental
+Warning: Can't read link_library file 'your_library.db'. (UID-3)
+Loading db file '/usr/cad/synopsys/synthesis/2022.03/libraries/syn/dw_foundation.sldb'
+Warning: DesignWare synthetic library dw_foundation.sldb is added to the synthetic_library in the current command. (UISN-40)
+Warning: Can't read link_library file 'your_library.db'. (UID-3)
+Information: Performing power optimization. (PWR-850)
+Error: Could not read the following target libraries:
+your_library.db 
+ (UIO-3)
+Error: Could not read the following target libraries:
+your_library.db 
+ (UIO-3)
+Error: No target library found. (OPT-1312)
+0
+write -format ddc     -hierarchy -output "dwconv_syn.ddc"
+Writing ddc file 'dwconv_syn.ddc'.
+1
+write_sdf -version 1.0  dwconv_syn.sdf
+Information: Annotated 'cell' delays are assumed to include load delay. (UID-282)
+Information: Writing timing information to file '/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/dwconv/dwconv_syn.sdf'. (WT-3)
+Information: Updating design information... (UID-85)
+Warning: Design contains black-box components.  These cells will have no timing information. (WT-7)
+1
+write -format verilog -hierarchy -output dwconv_syn.v
+Writing verilog file '/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/dwconv/dwconv_syn.v'.
+Warning: Verilog writer has added 27 nets to module dwconv_channel using SYNOPSYS_UNCONNECTED_ as prefix.  Please use the change_names command to make the correct changes before invoking the verilog writer.  (VO-11)
+Warning: Module dwconv_channel contains unmapped components.  The output netlist might not be read back into the system. (VO-12)
+Warning: Module dwconv contains unmapped components.  The output netlist might not be read back into the system. (VO-12)
+1
+report_area > dwconv_area.log
+report_timing > dwconv_timing.log
+report_qor   >  dwconv_syn.qor
+#write_parasitics -output CONVEX_syn.spefdc_shell> 

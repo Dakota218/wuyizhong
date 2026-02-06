@@ -12,7 +12,7 @@ module dwconv_channel (
     output logic out_valid,
     output logic signed [20:0] sum
 );
-logic signed [15:0] weight_reg[0:8];
+logic signed [15:0] weight_reg[0:8], weight_0, weight_1, weight_2, weight_3, weight_4, weight_5, weight_6, weight_7, weight_8;
 logic signed [15:0] in_data_reg[0:255][0:354], in_data_reg_n[0:255][0:354], bias_reg[0:1], in_data_354, in_data_353, in_data_352, in_data_178, in_data_177, in_data_176, in_data_2, in_data_1, in_data_0;
 logic signed [31:0] mul[0:8], mul_n[0:8], mul_closed[0:8];
 logic [7:0] col_reg;
@@ -34,10 +34,20 @@ always_comb begin
     in_data_352 = in_data_reg[0][352];
     in_data_353 = in_data_reg[0][353];
     in_data_354 = in_data_reg[0][354];
+
+    weight_0 = weight_reg[0];
+    weight_1 = weight_reg[1];
+    weight_2 = weight_reg[2];
+    weight_3 = weight_reg[3];
+    weight_4 = weight_reg[4];
+    weight_5 = weight_reg[5];
+    weight_6 = weight_reg[6];
+    weight_7 = weight_reg[7];
+    weight_8 = weight_reg[8];
 end
 
-
-assign out_valid_n = (col_reg == 1 && in_count == 2)? 1 : ((col_reg == 176 &&  row_reg == 127)? 0 : out_valid);
+assign out_valid_n = (col_reg == 1 && in_count == 2)? 1 : out_valid;
+// assign out_valid_n = (col_reg == 1 && in_count == 2)? 1 : ((col_reg == 176 &&  row_reg == 127)? 0 : out_valid);
 assign bias_extended = {{8{bias_reg[1][15]}}, bias_reg[1], 8'b0};
 assign sum_temp = (mul_closed[0] + mul_closed[1] + mul_closed[2] + mul_closed[3] + mul_closed[4] + mul_closed[5] + mul_closed[6] + mul_closed[7] + mul_closed[8] + bias_extended);
 always_comb begin
@@ -83,6 +93,7 @@ always_comb begin
 end
 
 always_comb begin
+    
         in_data_reg_n[0][354] = (in_valid)? in_data : 0;
         for (int j = 0; j<354; j++)begin
             in_data_reg_n[0][j] = in_data_reg[1][j+1];

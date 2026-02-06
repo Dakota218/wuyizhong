@@ -1,7 +1,7 @@
 rc file Version 1.0
 
 [Design]
-COMPILE_PATH=/RAID2/LAB/icssl/icsslRA21/Mix_ffn/dwconv
+COMPILE_PATH=/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/dwconv
 VCS_HOME=/usr/cad/synopsys/vcs/2022.06
 VERDI_HOME=/usr/cad/synopsys/verdi/2019.06/
 SystemC=FALSE

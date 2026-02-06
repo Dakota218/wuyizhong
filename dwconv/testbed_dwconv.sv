@@ -4,6 +4,7 @@
 
 // 2. 根據模擬類型 (RTL vs. GATE) 包含 DUT 原始碼
 `ifdef RTL
+    `define PATTERN_NUM 5721857
     `define DUMP_FILE "dwconv_rtl.fsdb"
     `define SDF_INSTANCE I_DUT
     `define SDF_FILE "dwconv_syn.sdf"
@@ -67,8 +68,9 @@ module TESTBED();
     
     initial begin
         `ifdef RTL
-            //$fsdbDumpfile("waves.fsdb");
-            //$fsdbDumpvars(0, TESTBED, "+mda");
+            $fsdbDumpfile("waves.fsdb");
+            vars
+            // $fsdbDumpvars(0, TESTBED, "+mda");
         `elsif GATE
             //$fsdbDumpfile("waves.fsdb");
             $sdf_annotate(`SDF_FILE, I_DUT);

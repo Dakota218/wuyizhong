@@ -1,0 +1,44 @@
+Warning: Can't read link_library file 'your_library.db'. (UID-3)
+Error: Could not read the following target libraries:
+your_library.db 
+ (UIO-3)
+Warning: Can't read link_library file 'your_library.db'. (UID-3)
+Warning: Can't read link_library file 'your_library.db'. (UID-3)
+Warning: Can't read link_library file 'your_library.db'. (UID-3)
+Warning: Can't read link_library file 'your_library.db'. (UID-3)
+Warning: Can't read link_library file 'your_library.db'. (UID-3)
+Warning: Can't read link_library file 'your_library.db'. (UID-3)
+Warning: Can't read link_library file 'your_library.db'. (UID-3)
+ 
+****************************************
+Report : area
+Design : dwconv
+Version: T-2022.03
+Date   : Wed Jan 28 10:25:29 2026
+****************************************
+
+Information: Updating design information... (UID-85)
+Library(s) Used:
+
+    gtech (File: /usr/cad/synopsys/synthesis/2022.03/libraries/syn/gtech.db)
+
+Number of ports:                         3483
+Number of nets:                       1463515
+Number of cells:                      1457203
+Number of combinational cells:           6593
+Number of sequential cells:           1450534
+Number of macros/black boxes:               0
+Number of buf/inv:                       1041
+Number of references:                      15
+
+Combinational area:                  0.000000
+Buf/Inv area:                        0.000000
+Noncombinational area:               0.000000
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (No wire load specified)
+
+Total cell area:                     0.000000
+Total area:                 undefined
+
+Information: This design contains unmapped logic. (RPT-7)
+1
