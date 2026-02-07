@@ -22,7 +22,7 @@ typedef enum logic [1:0] {
     IDLE,
     INIT_ZERO,
     INPUT,
-    OUTPUT
+    10_INPUT
 } state_t;
 
 logic signed [15:0] weight_reg[0:8], weight_reg_n[0:8], weight_0, weight_1, weight_2, weight_3, weight_4, weight_5, weight_6, weight_7, weight_8;
@@ -50,49 +50,66 @@ logic [16:0] final_addr;  // 最終送給 SRAM 的位址
 assign memory_ptr_n = (in_valid_reg)? ((in_count - 1) * GROUP_SIZE) + in_col + 176 * in_row: memory_ptr;
 assign addr_circle = memory_ptr_n + ((in_valid_reg)? 0 : r_count);
 
-assign base_addr_n = (in_valid_reg)? ((in_count == 1)? 0 : ((base_addr == 90525)? 0 : base_addr + 355)) : base_addr;
+always_comb begin
+    if (state_t'(state_n) == INPUT) begin
+        base_addr_n = (state_t'(state) == INIT_ZERO)? 0 : ((base_addr == 90525)? 0 : (base_addr + 355))
+    end else begin
+        base_addr_n = (in_valid_reg)? ((in_count == 1)? 0 : ((base_addr == 90525)? 0 : base_addr + 355)) : base_addr;
+    end
+end
+// assign base_addr_n = (in_valid_reg)? ((in_count == 1)? 0 : ((base_addr == 90525)? 0 : base_addr + 355)) : base_addr;
 // assign offset_cnt_n = (in_valid_reg)? ((176 * in_row) + in_col) % GROUP_SIZE : ((offset_cnt == GROUP_SIZE - 1)? 0 : offset_cnt + 1);
 // assign offset_cnt_n = (in_valid_reg)? ((col == 1 && row == 0 && in_count == 1 && r_count == 0)? 177 : (((offset_cnt_reg + (in_count == 1)) == 356)? 0 : (offset_cnt_reg + (in_count == 1)))) : ((offset_cnt == 0)? 355 : offset_cnt - 1);
 always_comb begin
     // 1. 先設定預設值，避免 latch (這行通常是 offset_cnt_reg 或保持原值)
     offset_cnt_n = offset_cnt_reg; 
 
+    case(state_t'(state))
+        10_INPUT: begin
     // 2. 最外層判斷：in_valid_reg
-    if (in_valid_reg) begin
-        
-        // 特殊條件判斷：啟動初始值
-        if (col == 1 && row == 0 && in_count == 1 && r_count == 0) begin
-            offset_cnt_n = 177;
-        end else begin
-            // 一般累加邏輯
-            // 這裡原本邏輯是：如果 (當前值 + 增量) == 356，則歸零
-            // 增量邏輯是：如果 in_count == 1 則 +1，否則 +0
-            
-            logic [8:0] next_val_temp; // 宣告一個暫存變數方便理解
-            // next_val_temp = offset_cnt_reg + (in_count == 256 );///////
-            next_val_temp = offset_cnt_reg + (in_count == 1 && r_count == 0 );
+            if (in_valid_reg) begin
+                
+                // 特殊條件判斷：啟動初始值
+                if (col == 1 && row == 0 && in_count == 1 && r_count == 0) begin
+                    offset_cnt_n = 177;
+                end else begin
+                    // 一般累加邏輯
+                    // 這裡原本邏輯是：如果 (當前值 + 增量) == 356，則歸零
+                    // 增量邏輯是：如果 in_count == 1 則 +1，否則 +0
+                    
+                    logic [8:0] next_val_temp; // 宣告一個暫存變數方便理解
+                    // next_val_temp = offset_cnt_reg + (in_count == 256 );///////
+                    next_val_temp = offset_cnt_reg + (in_count == 1 && r_count == 0 );
 
-            if (next_val_temp == 356) begin
-                offset_cnt_n = 0;
+                    if (next_val_temp == 356) begin
+                        offset_cnt_n = 0;
+                    end else begin
+                        offset_cnt_n = next_val_temp;
+                    end
+                end
+
             end else begin
-                offset_cnt_n = next_val_temp;
+                // 檢查是否倒數到 0
+                if (offset_cnt == 0) begin // 注意：你原程式碼這裡是用 offset_cnt 而非 offset_cnt_reg，請確認變數是否正確
+                    offset_cnt_n = 355;
+                end else begin
+                    offset_cnt_n = offset_cnt - 1;
+                end
             end
         end
-
-    end else begin
-        // 檢查是否倒數到 0
-        if (offset_cnt == 0) begin // 注意：你原程式碼這裡是用 offset_cnt 而非 offset_cnt_reg，請確認變數是否正確
-            offset_cnt_n = 355;
-        end else begin
-            offset_cnt_n = offset_cnt - 1;
+        INIT_ZERO : offset_cnt_n = 0;
+        INPUT: begin
+            offset_cnt_n = offset_cnt + (in_count == 256);
         end
-    end
+
+
+    endcase
 end
 assign offset_cnt_reg_n = (r_count == 1 && base_addr == 0)? offset_cnt : offset_cnt_reg;
 always_comb begin
     case(state_t'(state))
         IDLE, INIT_ZERO: addr = addr_cnt;
-        INPUT:     addr = addr_circle;
+        INPUT, 10_INPUT:     addr = addr_circle;
         default:   addr = 0;
     endcase
 end

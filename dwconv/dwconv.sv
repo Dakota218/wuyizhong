@@ -26,7 +26,7 @@ typedef enum logic [1:0] {
     IDLE,
     INIT_ZERO,
     INPUT,
-    OUTPUT
+    10_INPUT
 } state_t;
 
 state_t state, state_n;
@@ -70,8 +70,8 @@ always_comb begin
     case (state)
         IDLE:      state_n = (in_valid)?        INIT_ZERO : state;
         INIT_ZERO: state_n = (addr_cnt == 90800)? INPUT : state;
-        INPUT: state_n = state;//////////////
-        OUTPUT: state_n = (out_count == 255)? INPUT : state;
+        INPUT: state_n = (in_col == 0 && conv_col == 1)? 10_INPUT : state;//////////////
+        10_INPUT: state_n = state;
         default: state_n = IDLE;
 
     endcase
