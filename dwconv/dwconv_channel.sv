@@ -6,6 +6,7 @@ module dwconv_channel (
     input  logic signed [15:0] in_data,
     input  logic signed[15:0] bias,
     input logic [1:0] state,
+    input logic [1:0] state_n,
     input logic [7:0] col,
     input logic [6:0] row,
     input logic [7:0] in_col,
@@ -22,11 +23,11 @@ typedef enum logic [1:0] {
     IDLE,
     INIT_ZERO,
     INPUT,
-    10_INPUT
+    INPUT_10
 } state_t;
 
 logic signed [15:0] weight_reg[0:8], weight_reg_n[0:8], weight_0, weight_1, weight_2, weight_3, weight_4, weight_5, weight_6, weight_7, weight_8;
-logic signed [15:0] /*in_data_reg[0:255][0:354], in_data_reg_n[0:255][0:354], */in_data_reg[0:8], bias_reg[0:1], bias_reg_n[0:1]/* in_data_354, in_data_353, in_data_352, in_data_178, in_data_177, in_data_176, in_data_2, in_data_1, in_data_0*/;
+logic signed [15:0] /*in_data_reg[0:255][0:354], in_data_reg_n[0:255][0:354], */in_data_0_ready[0:2], in_data_reg0_n, sram_rdata, in_data_reg[0:8], bias_reg[0:1], bias_reg_n[0:1]/* in_data_354, in_data_353, in_data_352, in_data_178, in_data_177, in_data_176, in_data_2, in_data_1, in_data_0*/;
 logic signed [31:0] mul[0:8], mul_n[0:8], mul_closed[0:8];
 logic [7:0] col_reg[0:1], col_reg_n[0:1];
 logic [6:0] row_reg;
@@ -52,9 +53,10 @@ assign addr_circle = memory_ptr_n + ((in_valid_reg)? 0 : r_count);
 
 always_comb begin
     if (state_t'(state_n) == INPUT) begin
-        base_addr_n = (state_t'(state) == INIT_ZERO)? 0 : ((base_addr == 90525)? 0 : (base_addr + 355))
+        base_addr_n = (state_t'(state) == INIT_ZERO)? 0 : ((base_addr == 90525)? 0 : (base_addr + 355));
     end else begin
-        base_addr_n = (in_valid_reg)? ((in_count == 1)? 0 : ((base_addr == 90525)? 0 : base_addr + 355)) : base_addr;
+        // base_addr_n = (in_valid)? ((in_count == 1)? 0 : ((base_addr == 90525)? 0 : base_addr + 355)) : base_addr;
+        base_addr_n = (in_valid)?  ((base_addr == 90525)? 0 : base_addr + 355) : base_addr;
     end
 end
 // assign base_addr_n = (in_valid_reg)? ((in_count == 1)? 0 : ((base_addr == 90525)? 0 : base_addr + 355)) : base_addr;
@@ -65,9 +67,9 @@ always_comb begin
     offset_cnt_n = offset_cnt_reg; 
 
     case(state_t'(state))
-        10_INPUT: begin
+        INPUT_10: begin
     // 2. 最外層判斷：in_valid_reg
-            if (in_valid_reg) begin
+            if (in_valid) begin
                 
                 // 特殊條件判斷：啟動初始值
                 if (col == 1 && row == 0 && in_count == 1 && r_count == 0) begin
@@ -105,11 +107,12 @@ always_comb begin
 
     endcase
 end
-assign offset_cnt_reg_n = (r_count == 1 && base_addr == 0)? offset_cnt : offset_cnt_reg;
+assign offset_cnt_reg_n = (r_count == 0 && base_addr == 0)? offset_cnt : offset_cnt_reg;
 always_comb begin
     case(state_t'(state))
         IDLE, INIT_ZERO: addr = addr_cnt;
-        INPUT, 10_INPUT:     addr = addr_circle;
+        // INPUT, INPUT_10:     addr = addr_circle;
+        INPUT, INPUT_10:     addr = base_addr + offset_cnt;
         default:   addr = 0;
     endcase
 end
@@ -125,7 +128,7 @@ sram_16x90880_simple #(
         .W     (in_valid),    // 連接控制訊號
         .A     (addr),  // 連接位址
         .D     (in_data), // 連接寫入資料
-        .Q     (in_data_reg[8])  // 接收讀出資料
+        .Q     (sram_rdata)  // 接收讀出資料
     );
 
 
@@ -151,7 +154,7 @@ sram_16x90880_simple #(
 //     weight_7 = weight_reg[7];
 //     weight_8 = weight_reg[8];
 // end
-
+// assign out_valid = (r_count == 3) && state != IDLE;
 assign out_valid = (r_count == 3 && state != IDLE && !(col == 1 && row == 0 && in_count == 1));
 // assign out_valid_n = (col_reg == 1 && in_count == 2)? 1 : out_valid;
 // assign out_valid_n = (col_reg == 1 && in_count == 2)? 1 : ((col_reg == 176 &&  row_reg == 127)? 0 : out_valid);
@@ -237,6 +240,7 @@ end
 //         end
 // end
 
+assign in_data_reg[0] = (r_count == 2)? in_data_0_ready[2] : sram_rdata;
 always_ff @(posedge clk or negedge rst_n)begin
     if(!rst_n)begin
         bias_reg[0] <= 0;
@@ -250,7 +254,7 @@ always_ff @(posedge clk or negedge rst_n)begin
             weight_reg[i] <= 0;
             mul[i] <= 0;
         end
-        for (int i=0; i<8; i++) begin
+        for (int i=1; i<9; i++) begin
             in_data_reg[i] <= 0;
         end
         // for (int i = 0; i<256; i++)begin
@@ -266,6 +270,10 @@ always_ff @(posedge clk or negedge rst_n)begin
         base_addr <= 0;
         offset_cnt <= 0;
         offset_cnt_reg <= 0;
+        for (int i=0; i<3; i++) begin
+            in_data_0_ready[i] <= 0;
+        end
+        
 
     end else begin
         bias_reg[0] <= bias_reg_n[0];
@@ -277,13 +285,14 @@ always_ff @(posedge clk or negedge rst_n)begin
         row_reg <= row;
         // out_valid <= out_valid_n;
 
-        for (int i = 0; i<9; i++)begin
+        for (int i = 0; i<9; i++)begin  
             weight_reg[i] <=  weight_reg_n[i];
             mul[i] <= mul_n[i];
         end
 
-        for (int i=0; i<8; i++) begin
-            in_data_reg[i] <= in_data_reg[i+1];
+        
+        for (int i=1; i<9; i++) begin
+            in_data_reg[i] <= in_data_reg[i-1];
         end
         // for (int i = 0; i<256; i++)begin
         //     for (int j = 0; j<355; j++)begin
@@ -299,6 +308,9 @@ always_ff @(posedge clk or negedge rst_n)begin
         base_addr <= base_addr_n;
         offset_cnt <= offset_cnt_n;
         offset_cnt_reg <= offset_cnt_reg_n;
+        in_data_0_ready[0] <= in_data;
+        in_data_0_ready[1] <= in_data_0_ready[0];
+        in_data_0_ready[2] <= in_data_0_ready[1];
     end
 end
 

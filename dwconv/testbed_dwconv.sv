@@ -72,10 +72,10 @@ module TESTBED();
             $fsdbDumpvars(0, I_DUT, "+mda"); // 0 代表 DUT 及其下所有層級
             // $fsdbDumpvars(0, TESTBED, "+mda");
             // 建立一個獨立的循環，每 1000 單位時間就 flush 一次
-            // forever begin
-            //     #1000;          // 等待 1000 個單位
-            //     $fsdbDumpflush; // 強制存檔
-            // end
+            forever begin
+                #1000;          // 等待 1000 個單位
+                $fsdbDumpflush; // 強制存檔
+            end
         `elsif GATE
             //$fsdbDumpfile("waves.fsdb");
             $sdf_annotate(`SDF_FILE, I_DUT);

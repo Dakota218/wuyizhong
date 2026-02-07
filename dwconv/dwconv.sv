@@ -26,7 +26,7 @@ typedef enum logic [1:0] {
     IDLE,
     INIT_ZERO,
     INPUT,
-    10_INPUT
+    INPUT_10
 } state_t;
 
 state_t state, state_n;
@@ -40,6 +40,7 @@ dwconv_channel dw (
     .in_data (in_data),
     .bias (bias),
     .state (state),
+    .state_n (state_n),
     .col(conv_col),
     .row(conv_row),
     .in_col(in_col),
@@ -70,14 +71,14 @@ always_comb begin
     case (state)
         IDLE:      state_n = (in_valid)?        INIT_ZERO : state;
         INIT_ZERO: state_n = (addr_cnt == 90800)? INPUT : state;
-        INPUT: state_n = (in_col == 0 && conv_col == 1)? 10_INPUT : state;//////////////
-        10_INPUT: state_n = state;
+        INPUT: state_n = (in_col == 0 && conv_col == 1)? INPUT_10 : state;//////////////
+        INPUT_10: state_n = state;
         default: state_n = IDLE;
 
     endcase
 end
 // assign in_count_n = (in_count == 256)? 1 : in_count + (in_valid && state_n == INPUT);
-assign in_count_n = (in_count == 256)? (((conv_col == 1 || conv_col == 0)&& conv_row == 0)? 1 : ((r_count == 9)? 1 : in_count)): in_count + (in_valid && state_n == INPUT);
+assign in_count_n = (in_count == 256)? (((conv_col == 1 || conv_col == 0)&& conv_row == 0)? 1 : ((r_count == 9)? 1 : in_count)): (in_count + (in_valid && (state_n == INPUT || state_n == INPUT_10)));
 // assign start_conv_n = (in_row == 0 && in_col == 175 && in_count == 254)? 1'b1 : start_conv;
 // assign conv_flag = (in_row && in_count == 255)? !(in_row == 1 && in_col == 0) : 1'b0;
 assign conv_flag =  (in_row && in_count == 255)? ((!conv_col && !conv_row)? 1 : (r_count == 9)) : 0;

@@ -2,7 +2,7 @@ Magic 271485
 Revision Verdi_P-2019.06
 
 ; Window Layout <x> <y> <width> <height> <signalwidth> <valuewidth>
-viewPort 0 0 1470 934 177 212
+viewPort -1 27 1468 820 177 208
 
 ; File list:
 ; openDirFile [-d delimiter] [-s time_offset] [-rf auto_bus_rule_file] path_name file_name
@@ -16,8 +16,8 @@ signalSpacing 5
 
 ; windowTimeUnit is used for zoom, cursor & marker
 ; waveform viewport range
-zoom 0.000000 49324865.000000
-cursor 0.000000
+zoom 1358620206.763322 1358836366.431291
+cursor 1361230000.000000
 marker 0.000000
 
 ; user define markers
@@ -25,7 +25,7 @@ marker 0.000000
 ; visible top row signal index
 top 0
 ; marker line index
-markerPos 15
+markerPos 39
 
 ; event list
 ; addEvent event_name event_expression
@@ -49,7 +49,7 @@ addGroup "G1"
 activeDirFile "" "/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/dwconv/waves.fsdb"
 addSignal -h 15 /TESTBED/I_DUT/bias[15:0]
 addSignal -h 15 -holdScope clk
-addSignal -h 15 -holdScope in_data[15:0]
+addSignal -h 15 -2COMP -UDEC -holdScope in_data[15:0]
 addSignal -h 15 -holdScope in_valid
 addSignal -h 15 -holdScope out_valid
 addSignal -h 15 -holdScope rst_n
@@ -63,6 +63,30 @@ addSignal -h 15 -UNSIGNED -UDEC -holdScope in_col[7:0]
 addSignal -h 15 -UNSIGNED -UDEC -holdScope in_count[8:0]
 addSignal -h 15 -UNSIGNED -UDEC -holdScope in_row[6:0]
 addGroup "G3"
+addSignal -h 15 -UNSIGNED -UDEC /TESTBED/I_DUT/dw/addr[18:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope addr_cnt[16:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope memory_ptr[18:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope r_count[3:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope memory_ptr_n[18:0]
+addGroup "G4"
+addSignal -h 15 -UNSIGNED -UDEC /TESTBED/I_DUT/dw/in_col[7:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope in_count[8:0]
+addGroup "G5"
+addSignal -h 15 -UNSIGNED -UDEC /TESTBED/I_DUT/dw/base_addr[16:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope offset_cnt[8:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope offset_cnt_reg[8:0]
+addGroup "G6"
+addSignal -expanded -h 15 -UNSIGNED -HEX /TESTBED/I_DUT/dw/in_data_reg[0:8]
+addSignal -h 15 -2COMP -UDEC -holdScope in_data_reg[0][15:0]
+addSignal -h 15 -2COMP -UDEC -holdScope in_data_reg[1][15:0]
+addSignal -h 15 -2COMP -UDEC -holdScope in_data_reg[2][15:0]
+addSignal -h 15 -2COMP -UDEC -holdScope in_data_reg[3][15:0]
+addSignal -h 15 -2COMP -UDEC -holdScope in_data_reg[4][15:0]
+addSignal -h 15 -2COMP -UDEC -holdScope in_data_reg[5][15:0]
+addSignal -h 15 -2COMP -UDEC -holdScope in_data_reg[6][15:0]
+addSignal -h 15 -2COMP -UDEC -holdScope in_data_reg[7][15:0]
+addSignal -h 15 -2COMP -UDEC -holdScope in_data_reg[8][15:0]
+addGroup "G7"
 
 ; getSignalForm Scope Hierarchy Status
 ; active file of getSignalForm
@@ -73,6 +97,7 @@ getSignalForm close
 
 "/TESTBED"
 "/TESTBED/I_DUT"
+"/TESTBED/I_DUT/dw"
 
 SCOPE_LIST_BEGIN
 "/TESTBED"

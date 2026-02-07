@@ -180,7 +180,7 @@ module PATTERN (
                     weight   <= '0;
                     bias     <= 16'h0000;
 
-                    repeat (9) begin
+                    repeat (8) begin
                         @(negedge clk);
                     end
                 end

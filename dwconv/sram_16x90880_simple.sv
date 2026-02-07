@@ -15,6 +15,8 @@ module sram_16x90880_simple #(
 
   // Memory array (RTL behavioral model)
   logic [DW-1:0] mem [0:DEPTH-1];
+  logic [DW-1:0] mem176;
+  assign mem176 = mem[176];
 
   // Registered address for sync read
   logic [AW-1:0] A_q;
