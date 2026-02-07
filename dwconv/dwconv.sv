@@ -19,8 +19,11 @@ logic conv_flag;
 logic [7:0] out_count, out_count_n; // 8-bit (0-255)   
 logic [20:0] sum_temp[0:255], sum_temp_n[0:255];
 
+logic [16:0] addr_cnt, addr_cnt_n;
+
 typedef enum logic [1:0] {
     IDLE,
+    INIT_ZERO,
     INPUT,
     OUTPUT
 } state_t;
@@ -35,9 +38,13 @@ dwconv_channel dw (
     .weight (weight),
     .in_data (in_data),
     .bias (bias),
+    .state (state),
     .col(conv_col),
     .row(conv_row),
+    .in_col(in_col),
+    .in_row(in_row),
     .in_count(in_count),
+    .addr_cnt(addr_cnt),
 
     .out_valid (out_valid),
     // .in_count(count[i]),
@@ -54,11 +61,13 @@ dwconv_channel dw (
 //     end
 // end
 
+assign addr_cnt_n = addr_cnt + (in_valid && (state == IDLE || state == INIT_ZERO));
 //FSM
 always_comb begin
     state_n  = state;
     case (state)
-        IDLE:  state_n = (in_valid)?        INPUT : state;
+        IDLE:      state_n = (in_valid)?        INIT_ZERO : state;
+        INIT_ZERO: state_n = (addr_cnt == 90800)? INPUT : state;
         INPUT: state_n = state;//////////////
         OUTPUT: state_n = (out_count == 255)? INPUT : state;
         default: state_n = IDLE;
@@ -66,7 +75,7 @@ always_comb begin
     endcase
 end
 
-assign in_count_n = (in_count == 256)? 1 : in_count + (in_valid);
+assign in_count_n = (in_count == 256)? 1 : in_count + (in_valid && state_n == INPUT);
 // assign start_conv_n = (in_row == 0 && in_col == 175 && in_count == 254)? 1'b1 : start_conv;
 // assign conv_flag = (in_row && in_count == 255)? !(in_row == 1 && in_col == 0) : 1'b0;
 assign conv_flag = (in_row && in_count == 255);
@@ -76,23 +85,17 @@ always_comb begin
     in_col_n = in_col;
     conv_col_n = conv_col;
 
-    case (state)
-        IDLE: begin
+    if (state == INPUT) begin
+
+        if (in_count == 256) begin
+            in_row_n = (in_col == 175)? in_row + 1 : in_row;
+            in_col_n = (in_col == 175)? 0 : in_col + 1;
+        end else begin
+            conv_col_n = (conv_flag) ? ((conv_col == 176) ? 1 : conv_col + 1) : conv_col;
+            conv_row_n = (conv_flag && conv_col == 176) ? conv_row + 1 : conv_row;
         end
 
-        INPUT: begin
-            if (in_count == 256) begin
-                in_row_n = (in_col == 175)? in_row + 1 : in_row;
-                in_col_n = (in_col == 175)? 0 : in_col + 1;
-            end else begin
-                conv_col_n = (conv_flag) ? ((conv_col == 176) ? 1 : conv_col + 1) : conv_col;
-                conv_row_n = (conv_flag && conv_col == 176) ? conv_row + 1 : conv_row;
-            end
-        end
-
-        OUTPUT: begin
-        end
-    endcase
+    end
 end
 
 always_ff @(posedge clk or negedge rst_n) begin
@@ -110,6 +113,7 @@ always_ff @(posedge clk or negedge rst_n) begin
 
 
         out_count <= 0;
+        addr_cnt <= 0;
         // out_valid <= 0;
 
     end else begin
@@ -125,6 +129,7 @@ always_ff @(posedge clk or negedge rst_n) begin
         // end
 
         out_count <= out_count_n;
+        addr_cnt <= addr_cnt_n;
         // out_valid <= out_valid_n;
 
     end

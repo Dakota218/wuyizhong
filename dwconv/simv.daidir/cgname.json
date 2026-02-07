@@ -5,6 +5,12 @@
         "module",
         1
     ],
+    "dwconv": [
+        "dwconv",
+        "BHPNL",
+        "module",
+        4
+    ],
     "TESTBED": [
         "TESTBED",
         "TAUdR",

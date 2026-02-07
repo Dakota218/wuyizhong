@@ -201,8 +201,8 @@ StickSet-TextColor = black
 [FSM_Dlg-Print]
 Orientation = Landscape
 [FileBrowser]
-nWaveOpenFsdbDirHistory = "\"/RAID2/LAB/icssl/icsslRA21/Mix_ffn/waves.fsdb\""
 nWaveRestoreRCDirHistory = "\"/RAID2/LAB/icssl/icsslRA21/Mix_ffn/dwconv/signal.rc\""
+nWaveOpenFsdbDirHistory = "\"/RAID2/LAB/icssl/icsslRA21/Mix_ffn/waves.fsdb\"" "\"/RAID2/LAB/icssl/icsslRA21/Mix_ffn/dwconv/novas.fsdb\"" "\"/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/dwconv/waves.fsdb\""
 [Form]
 version = Verdi_P-2019.06
 [General]
@@ -327,11 +327,11 @@ FileName = test.ps
 PaperSize = A4 - 210x297 (mm)
 ColorPrint = FALSE
 [QtDialog]
-saveSigDlg = 492,274,551,386
-openFileDlg = 467,226,602,483
-QwUserAskDlg = 596,339,324,114
-qWaveSignalDialog = 368,228,800,479
 restoreSigDlg = 492,248,551,438
+openFileDlg = 434,247,602,483
+qWaveSignalDialog = 335,249,800,479
+QwUserAskDlg = 596,427,324,148
+saveSigDlg = 459,296,551,386
 [Session Cache]
 1 = string (session file name)
 2 = string (session file name)
@@ -545,8 +545,8 @@ waveform_vertical_scroll_bar = TRUE
 scope_to_save_with_macro
 open_file_dir
 open_rc_file_dir
-getSignalForm = 368 228 800 479 164 381 390 89
-viewPort = 0 23 1536 889 177 212
+getSignalForm = 335 249 800 479 164 381 390 89
+viewPort = 0 0 1470 934 177 210
 signalSpacing = 5
 digitalSignalHeight = 15
 analogSignalHeight = 98
@@ -789,7 +789,7 @@ maskIsolation = TRUE
 maskRetention = TRUE
 maskDrivingPowerOff = TRUE
 maskToggle = TRUE
-autoBackupSignals = off 5 "\"/RAID2/LAB/icssl/icsslRA21/nWaveLog\"" "\"novas_autosave_sig\""
+autoBackupSignals = off 5 "\"/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/dwconv/nWaveLog\"" "\"novas_autosave_sig\""
 signal_rc_attribute = 65535
 signal_rc_alias_attribute = 0
 ConvertAttr1 = -inc FALSE
@@ -817,8 +817,10 @@ curveWindow_Drag&Drop_Mode = TRUE
 hspiceIncOpenMode = TRUE
 pcSelectMode = TRUE
 hierarchyDelimiter = /
-RecentFile1 = "\"/RAID2/LAB/icssl/icsslRA21/Mix_ffn/dwconv/signal.rc\""
-RecentFile2 = "\"/RAID2/LAB/icssl/icsslRA21/Mix_ffn/waves.fsdb\""
+RecentFile1 = "\"/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/dwconv/waves.fsdb\""
+RecentFile2 = "\"/RAID2/LAB/icssl/icsslRA21/Mix_ffn/dwconv/novas.fsdb\""
+RecentFile3 = "\"/RAID2/LAB/icssl/icsslRA21/Mix_ffn/dwconv/signal.rc\""
+RecentFile4 = "\"/RAID2/LAB/icssl/icsslRA21/Mix_ffn/waves.fsdb\""
 open_file_time_range = FALSE
 value_window_aligment = Right
 signal_window_alignment = Auto

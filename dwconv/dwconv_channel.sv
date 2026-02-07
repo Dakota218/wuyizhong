@@ -5,17 +5,29 @@ module dwconv_channel (
     input logic signed [143:0] weight,
     input  logic signed [15:0] in_data,
     input  logic signed[15:0] bias,
+    input logic [1:0] state,
     input logic [7:0] col,
     input logic [6:0] row,
+    input logic [7:0] in_col,
+    input logic [6:0] in_row,
     input logic [8:0] in_count,
+    input logic [16:0] addr_cnt,
     // input logic [6:0] in_count,
     output logic out_valid,
     output logic signed [20:0] sum
 );
-logic signed [15:0] weight_reg[0:8], weight_0, weight_1, weight_2, weight_3, weight_4, weight_5, weight_6, weight_7, weight_8;
-logic signed [15:0] in_data_reg[0:255][0:354], in_data_reg_n[0:255][0:354], bias_reg[0:1], in_data_354, in_data_353, in_data_352, in_data_178, in_data_177, in_data_176, in_data_2, in_data_1, in_data_0;
+
+typedef enum logic [1:0] {
+    IDLE,
+    INIT_ZERO,
+    INPUT,
+    OUTPUT
+} state_t;
+
+logic signed [15:0] weight_reg[0:8], weight_reg_n[0:8], weight_0, weight_1, weight_2, weight_3, weight_4, weight_5, weight_6, weight_7, weight_8;
+logic signed [15:0] /*in_data_reg[0:255][0:354], in_data_reg_n[0:255][0:354], */in_data_reg[0:8], bias_reg[0:1], bias_reg_n[0:1]/* in_data_354, in_data_353, in_data_352, in_data_178, in_data_177, in_data_176, in_data_2, in_data_1, in_data_0*/;
 logic signed [31:0] mul[0:8], mul_n[0:8], mul_closed[0:8];
-logic [7:0] col_reg;
+logic [7:0] col_reg[0:1], col_reg_n[0:1];
 logic [6:0] row_reg;
 logic [1:0] head_tail;
 logic out_valid_n;
@@ -24,29 +36,60 @@ logic signed [31:0] bias_extended;
 logic signed [28:0] sum_temp;
 logic signed [20:0] sum_n;
 
-always_comb begin
-    in_data_0 = in_data_reg[0][0];
-    in_data_1 = in_data_reg[0][1];  
-    in_data_2 = in_data_reg[0][2];
-    in_data_176 = in_data_reg[0][176];
-    in_data_177 = in_data_reg[0][177];
-    in_data_178 = in_data_reg[0][178];
-    in_data_352 = in_data_reg[0][352];
-    in_data_353 = in_data_reg[0][353];
-    in_data_354 = in_data_reg[0][354];
+logic [18:0] memory_ptr, memory_ptr_n, addr;
+logic [3:0] r_count_n, r_count;
 
-    weight_0 = weight_reg[0];
-    weight_1 = weight_reg[1];
-    weight_2 = weight_reg[2];
-    weight_3 = weight_reg[3];
-    weight_4 = weight_reg[4];
-    weight_5 = weight_reg[5];
-    weight_6 = weight_reg[6];
-    weight_7 = weight_reg[7];
-    weight_8 = weight_reg[8];
+assign memory_ptr_n = (in_valid)? ((in_count - 1) <<8) + in_col + 176 * in_row: memory_ptr;
+// assign addr = (in_valid)? (in_col + (in_count - 1) <<8) : (memory_ptr + r_count);
+// assign test = ((in_count - 1) <<8) + in_col;
+always_comb begin
+    case(state_t'(state))
+        IDLE, INIT_ZERO: addr = addr_cnt;
+        INPUT:     addr = memory_ptr_n + ((in_valid)? 0 : r_count);
+        default:   addr = 0;
+    endcase
 end
 
-assign out_valid_n = (col_reg == 1 && in_count == 2)? 1 : out_valid;
+assign r_count_n = (in_valid)? 0 : r_count + 1;
+sram_16x90880_simple #(
+        .DW(16), 
+        .DEPTH(90880), 
+        .AW(17)
+    ) u_sram (
+        .clk   (clk),
+        .rst_n (rst_n),
+        .W     (in_valid),    // 連接控制訊號
+        .A     (addr),  // 連接位址
+        .D     (in_data), // 連接寫入資料
+        .Q     (in_data_reg[8])  // 接收讀出資料
+    );
+
+
+
+// always_comb begin
+//     in_data_0 = in_data_reg[0][0];
+//     in_data_1 = in_data_reg[0][1];  
+//     in_data_2 = in_data_reg[0][2];
+//     in_data_176 = in_data_reg[0][176];
+//     in_data_177 = in_data_reg[0][177];
+//     in_data_178 = in_data_reg[0][178];
+//     in_data_352 = in_data_reg[0][352];
+//     in_data_353 = in_data_reg[0][353];
+//     in_data_354 = in_data_reg[0][354];
+
+//     weight_0 = weight_reg[0];
+//     weight_1 = weight_reg[1];
+//     weight_2 = weight_reg[2];
+//     weight_3 = weight_reg[3];
+//     weight_4 = weight_reg[4];
+//     weight_5 = weight_reg[5];
+//     weight_6 = weight_reg[6];
+//     weight_7 = weight_reg[7];
+//     weight_8 = weight_reg[8];
+// end
+
+assign out_valid = (r_count == 3);
+// assign out_valid_n = (col_reg == 1 && in_count == 2)? 1 : out_valid;
 // assign out_valid_n = (col_reg == 1 && in_count == 2)? 1 : ((col_reg == 176 &&  row_reg == 127)? 0 : out_valid);
 assign bias_extended = {{8{bias_reg[1][15]}}, bias_reg[1], 8'b0};
 assign sum_temp = (mul_closed[0] + mul_closed[1] + mul_closed[2] + mul_closed[3] + mul_closed[4] + mul_closed[5] + mul_closed[6] + mul_closed[7] + mul_closed[8] + bias_extended);
@@ -62,15 +105,29 @@ end
 // assign sum_n = (mul_closed[0] + mul_closed[1] + mul_closed[2] + mul_closed[3] + mul_closed[4] + mul_closed[5] + mul_closed[6] + mul_closed[7] + mul_closed[8] + bias_extended) >>> 8;
 
 always_comb begin
-    mul_n[0] = in_data_reg[0][0] * weight_reg[0];
-    mul_n[1] = in_data_reg[0][1] * weight_reg[1];
-    mul_n[2] = in_data_reg[0][2] * weight_reg[2];
-    mul_n[3] = in_data_reg[0][176] * weight_reg[3];
-    mul_n[4] = in_data_reg[0][177] * weight_reg[4];
-    mul_n[5] = in_data_reg[0][178] * weight_reg[5];
-    mul_n[6] = in_data_reg[0][352] * weight_reg[6];
-    mul_n[7] = in_data_reg[0][353] * weight_reg[7];
-    mul_n[8] = in_data_reg[0][354] * weight_reg[8];
+
+    for (int i = 0; i<9; i++)begin
+        weight_reg_n[i] = (in_valid)? weight[16*i +: 16] : weight_reg[i];
+    end
+
+    mul_n[0] = in_data_reg[0] * weight_reg[0];
+    mul_n[1] = in_data_reg[1] * weight_reg[1];
+    mul_n[2] = in_data_reg[2] * weight_reg[2];
+    mul_n[3] = in_data_reg[3] * weight_reg[3];
+    mul_n[4] = in_data_reg[4] * weight_reg[4];
+    mul_n[5] = in_data_reg[5] * weight_reg[5];
+    mul_n[6] = in_data_reg[6] * weight_reg[6];
+    mul_n[7] = in_data_reg[7] * weight_reg[7];
+    mul_n[8] = in_data_reg[8] * weight_reg[8];
+    // mul_n[0] = in_data_reg[0][0] * weight_reg[0];
+    // mul_n[1] = in_data_reg[0][1] * weight_reg[1];
+    // mul_n[2] = in_data_reg[0][2] * weight_reg[2];
+    // mul_n[3] = in_data_reg[0][176] * weight_reg[3];
+    // mul_n[4] = in_data_reg[0][177] * weight_reg[4];
+    // mul_n[5] = in_data_reg[0][178] * weight_reg[5];
+    // mul_n[6] = in_data_reg[0][352] * weight_reg[6];
+    // mul_n[7] = in_data_reg[0][353] * weight_reg[7];
+    // mul_n[8] = in_data_reg[0][354] * weight_reg[8];
 
     mul_closed[0] = (head_tail == 2'b10)? 0 : mul[0];
     mul_closed[1] = mul[1];
@@ -84,7 +141,15 @@ always_comb begin
 end
 
 always_comb begin
-    case (col_reg)
+    col_reg_n[0] = (in_valid)? col : col_reg[0];
+    col_reg_n[1] = (in_valid)? col_reg[0] : col_reg[1];
+
+    bias_reg_n[0] = (in_valid)? bias : bias_reg[0];
+    bias_reg_n[1] = (in_valid)? bias_reg[0] : bias_reg[1];
+end
+
+always_comb begin
+    case (col_reg[1])
         0:   head_tail = 2'b11;
         1:   head_tail = 2'b10;
         176: head_tail = 2'b01;
@@ -92,61 +157,77 @@ always_comb begin
     endcase
 end
 
-always_comb begin
-    
-        in_data_reg_n[0][354] = (in_valid)? in_data : 0;
-        for (int j = 0; j<354; j++)begin
-            in_data_reg_n[0][j] = in_data_reg[1][j+1];
-        end
-        for (int i = 1; i<255; i++)begin
-            for (int j = 0; j<355; j++)begin
-                in_data_reg_n[i][j] = in_data_reg[i+1][j];
-            end
-        end
-        for (int j = 0; j<355; j++)begin
-            in_data_reg_n[255][j] = in_data_reg[0][j];
-        end
-end
+// always_comb begin
+//         in_data[0] = 
+//         in_data_reg_n[0][354] = (in_valid)? in_data : 0;
+//         for (int j = 0; j<354; j++)begin
+//             in_data_reg_n[0][j] = in_data_reg[1][j+1];
+//         end
+//         for (int i = 1; i<255; i++)begin
+//             for (int j = 0; j<355; j++)begin
+//                 in_data_reg_n[i][j] = in_data_reg[i+1][j];
+//             end
+//         end
+//         for (int j = 0; j<355; j++)begin
+//             in_data_reg_n[255][j] = in_data_reg[0][j];
+//         end
+// end
 
 always_ff @(posedge clk or negedge rst_n)begin
     if(!rst_n)begin
         bias_reg[0] <= 0;
         bias_reg[1] <= 0;
-        col_reg <= 0;  
+        col_reg[0] <= 0; 
+        col_reg[1] <= 0;  
         row_reg <= 0;
-        out_valid <= 0;
+        // out_valid <= 0;
 
         for (int i = 0; i<9; i++)begin
             weight_reg[i] <= 0;
             mul[i] <= 0;
         end
-        for (int i = 0; i<256; i++)begin
-            for (int j = 0; j<355; j++)begin
-                in_data_reg[i][j] <= 0;
-            end
+        for (int i=0; i<8; i++) begin
+            in_data_reg[i] <= 0;
         end
+        // for (int i = 0; i<256; i++)begin
+        //     for (int j = 0; j<355; j++)begin
+        //         in_data_reg[i][j] <= 0;
+        //     end
+        // end
         sum <= 0;
-    end else begin
-        bias_reg[0] <= bias;
-        bias_reg[1] <= bias_reg[0];
 
-        col_reg <= col; 
+        r_count <= 0;
+        memory_ptr <= 0;
+        
+
+    end else begin
+        bias_reg[0] <= bias_reg_n[0];
+        bias_reg[1] <= bias_reg_n[1];
+
+        col_reg[0] <= col_reg_n[0]; 
+        col_reg[1] <= col_reg_n[1]; 
 
         row_reg <= row;
-        out_valid <= out_valid_n;
+        // out_valid <= out_valid_n;
 
         for (int i = 0; i<9; i++)begin
-            weight_reg[i] <= weight[16*i +: 16];
+            weight_reg[i] <=  weight_reg_n[i];
             mul[i] <= mul_n[i];
         end
 
-        for (int i = 0; i<256; i++)begin
-            for (int j = 0; j<355; j++)begin
-                in_data_reg[i][j] <= in_data_reg_n[i][j];
-            end
+        for (int i=0; i<8; i++) begin
+            in_data_reg[i] <= in_data_reg[i+1];
         end
+        // for (int i = 0; i<256; i++)begin
+        //     for (int j = 0; j<355; j++)begin
+        //         in_data_reg[i][j] <= in_data_reg_n[i][j];
+        //     end
+        // end
 
         sum <= sum_n;
+
+        r_count <= r_count_n;
+        memory_ptr <= memory_ptr_n;
     end
 end
 
