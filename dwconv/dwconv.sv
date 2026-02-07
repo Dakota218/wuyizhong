@@ -20,6 +20,7 @@ logic [7:0] out_count, out_count_n; // 8-bit (0-255)
 logic [20:0] sum_temp[0:255], sum_temp_n[0:255];
 
 logic [16:0] addr_cnt, addr_cnt_n;
+logic [3:0] r_count;
 
 typedef enum logic [1:0] {
     IDLE,
@@ -45,7 +46,8 @@ dwconv_channel dw (
     .in_row(in_row),
     .in_count(in_count),
     .addr_cnt(addr_cnt),
-
+    
+    .r_count(r_count),
     .out_valid (out_valid),
     // .in_count(count[i]),
     .sum (sum)
@@ -74,11 +76,11 @@ always_comb begin
 
     endcase
 end
-
-assign in_count_n = (in_count == 256)? 1 : in_count + (in_valid && state_n == INPUT);
+// assign in_count_n = (in_count == 256)? 1 : in_count + (in_valid && state_n == INPUT);
+assign in_count_n = (in_count == 256)? (((conv_col == 1 || conv_col == 0)&& conv_row == 0)? 1 : ((r_count == 9)? 1 : in_count)): in_count + (in_valid && state_n == INPUT);
 // assign start_conv_n = (in_row == 0 && in_col == 175 && in_count == 254)? 1'b1 : start_conv;
 // assign conv_flag = (in_row && in_count == 255)? !(in_row == 1 && in_col == 0) : 1'b0;
-assign conv_flag = (in_row && in_count == 255);
+assign conv_flag =  (in_row && in_count == 255)? ((!conv_col && !conv_row)? 1 : (r_count == 9)) : 0;
 always_comb begin
     in_row_n = in_row;
     conv_row_n = conv_row;
@@ -88,8 +90,17 @@ always_comb begin
     if (state == INPUT) begin
 
         if (in_count == 256) begin
-            in_row_n = (in_col == 175)? in_row + 1 : in_row;
-            in_col_n = (in_col == 175)? 0 : in_col + 1;
+            if (!in_row || (in_row == 1 && in_col == 0)) begin
+                in_row_n = (in_col == 175)? in_row + 1 : in_row;
+                in_col_n = (in_col == 175)? 0 : in_col + 1;           
+            end else begin
+                if (r_count == 9) begin
+                    in_row_n = (in_col == 175)? in_row + 1 : in_row;
+                    in_col_n = (in_col == 175)? 0 : in_col + 1;  
+                end
+            end
+            // in_row_n = (in_col == 175)? in_row + 1 : in_row;
+            // in_col_n = (in_col == 175)? 0 : in_col + 1;
         end else begin
             conv_col_n = (conv_flag) ? ((conv_col == 176) ? 1 : conv_col + 1) : conv_col;
             conv_row_n = (conv_flag && conv_col == 176) ? conv_row + 1 : conv_row;

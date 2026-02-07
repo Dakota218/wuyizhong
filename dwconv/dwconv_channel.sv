@@ -13,6 +13,7 @@ module dwconv_channel (
     input logic [8:0] in_count,
     input logic [16:0] addr_cnt,
     // input logic [6:0] in_count,
+    output logic [3:0] r_count,
     output logic out_valid,
     output logic signed [20:0] sum
 );
@@ -30,22 +31,68 @@ logic signed [31:0] mul[0:8], mul_n[0:8], mul_closed[0:8];
 logic [7:0] col_reg[0:1], col_reg_n[0:1];
 logic [6:0] row_reg;
 logic [1:0] head_tail;
-logic out_valid_n;
+logic out_valid_n, in_valid_reg;
 
 logic signed [31:0] bias_extended;
 logic signed [28:0] sum_temp;
 logic signed [20:0] sum_n;
 
-logic [18:0] memory_ptr, memory_ptr_n, addr;
-logic [3:0] r_count_n, r_count;
+logic [18:0] memory_ptr, memory_ptr_n, addr, addr_circle;
+logic [3:0] r_count_n;
 
-assign memory_ptr_n = (in_valid)? ((in_count - 1) <<8) + in_col + 176 * in_row: memory_ptr;
-// assign addr = (in_valid)? (in_col + (in_count - 1) <<8) : (memory_ptr + r_count);
-// assign test = ((in_count - 1) <<8) + in_col;
+parameter GROUP_SIZE = 355;
+// 訊號宣告
+logic [16:0] base_addr, base_addr_n;   // 該組的起始位址
+logic [8:0]  offset_cnt, offset_cnt_n, offset_cnt_reg, offset_cnt_reg_n;  // 組內的偏移量 (0~354)，9 bit 夠存 355
+logic [16:0] final_addr;  // 最終送給 SRAM 的位址
+
+
+assign memory_ptr_n = (in_valid_reg)? ((in_count - 1) * GROUP_SIZE) + in_col + 176 * in_row: memory_ptr;
+assign addr_circle = memory_ptr_n + ((in_valid_reg)? 0 : r_count);
+
+assign base_addr_n = (in_valid_reg)? ((in_count == 1)? 0 : ((base_addr == 90525)? 0 : base_addr + 355)) : base_addr;
+// assign offset_cnt_n = (in_valid_reg)? ((176 * in_row) + in_col) % GROUP_SIZE : ((offset_cnt == GROUP_SIZE - 1)? 0 : offset_cnt + 1);
+// assign offset_cnt_n = (in_valid_reg)? ((col == 1 && row == 0 && in_count == 1 && r_count == 0)? 177 : (((offset_cnt_reg + (in_count == 1)) == 356)? 0 : (offset_cnt_reg + (in_count == 1)))) : ((offset_cnt == 0)? 355 : offset_cnt - 1);
+always_comb begin
+    // 1. 先設定預設值，避免 latch (這行通常是 offset_cnt_reg 或保持原值)
+    offset_cnt_n = offset_cnt_reg; 
+
+    // 2. 最外層判斷：in_valid_reg
+    if (in_valid_reg) begin
+        
+        // 特殊條件判斷：啟動初始值
+        if (col == 1 && row == 0 && in_count == 1 && r_count == 0) begin
+            offset_cnt_n = 177;
+        end else begin
+            // 一般累加邏輯
+            // 這裡原本邏輯是：如果 (當前值 + 增量) == 356，則歸零
+            // 增量邏輯是：如果 in_count == 1 則 +1，否則 +0
+            
+            logic [8:0] next_val_temp; // 宣告一個暫存變數方便理解
+            // next_val_temp = offset_cnt_reg + (in_count == 256 );///////
+            next_val_temp = offset_cnt_reg + (in_count == 1 && r_count == 0 );
+
+            if (next_val_temp == 356) begin
+                offset_cnt_n = 0;
+            end else begin
+                offset_cnt_n = next_val_temp;
+            end
+        end
+
+    end else begin
+        // 檢查是否倒數到 0
+        if (offset_cnt == 0) begin // 注意：你原程式碼這裡是用 offset_cnt 而非 offset_cnt_reg，請確認變數是否正確
+            offset_cnt_n = 355;
+        end else begin
+            offset_cnt_n = offset_cnt - 1;
+        end
+    end
+end
+assign offset_cnt_reg_n = (r_count == 1 && base_addr == 0)? offset_cnt : offset_cnt_reg;
 always_comb begin
     case(state_t'(state))
         IDLE, INIT_ZERO: addr = addr_cnt;
-        INPUT:     addr = memory_ptr_n + ((in_valid)? 0 : r_count);
+        INPUT:     addr = addr_circle;
         default:   addr = 0;
     endcase
 end
@@ -88,7 +135,7 @@ sram_16x90880_simple #(
 //     weight_8 = weight_reg[8];
 // end
 
-assign out_valid = (r_count == 3);
+assign out_valid = (r_count == 3 && state != IDLE && !(col == 1 && row == 0 && in_count == 1));
 // assign out_valid_n = (col_reg == 1 && in_count == 2)? 1 : out_valid;
 // assign out_valid_n = (col_reg == 1 && in_count == 2)? 1 : ((col_reg == 176 &&  row_reg == 127)? 0 : out_valid);
 assign bias_extended = {{8{bias_reg[1][15]}}, bias_reg[1], 8'b0};
@@ -198,7 +245,10 @@ always_ff @(posedge clk or negedge rst_n)begin
 
         r_count <= 0;
         memory_ptr <= 0;
-        
+        in_valid_reg <= 0;
+        base_addr <= 0;
+        offset_cnt <= 0;
+        offset_cnt_reg <= 0;
 
     end else begin
         bias_reg[0] <= bias_reg_n[0];
@@ -228,6 +278,10 @@ always_ff @(posedge clk or negedge rst_n)begin
 
         r_count <= r_count_n;
         memory_ptr <= memory_ptr_n;
+        in_valid_reg <= in_valid;
+        base_addr <= base_addr_n;
+        offset_cnt <= offset_cnt_n;
+        offset_cnt_reg <= offset_cnt_reg_n;
     end
 end
 
