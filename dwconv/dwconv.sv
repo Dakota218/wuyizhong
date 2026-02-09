@@ -46,7 +46,7 @@ dwconv_channel dw (
     .in_col(in_col),
     .in_row(in_row),
     .in_count(in_count),
-    .addr_cnt(addr_cnt),
+    .addr_cnt_n(addr_cnt_n),
     
     .r_count(r_count),
     .out_valid (out_valid),
@@ -70,7 +70,7 @@ always_comb begin
     state_n  = state;
     case (state)
         IDLE:      state_n = (in_valid)?        INIT_ZERO : state;
-        INIT_ZERO: state_n = (addr_cnt == 90800)? INPUT : state;
+        INIT_ZERO: state_n = (addr_cnt == 90880)? INPUT : state;
         INPUT: state_n = (in_col == 0 && conv_col == 1)? INPUT_10 : state;//////////////
         INPUT_10: state_n = state;
         default: state_n = IDLE;
@@ -81,14 +81,21 @@ end
 assign in_count_n = (in_count == 256)? (((conv_col == 1 || conv_col == 0)&& conv_row == 0)? 1 : ((r_count == 9)? 1 : in_count)): (in_count + (in_valid && (state_n == INPUT || state_n == INPUT_10)));
 // assign start_conv_n = (in_row == 0 && in_col == 175 && in_count == 254)? 1'b1 : start_conv;
 // assign conv_flag = (in_row && in_count == 255)? !(in_row == 1 && in_col == 0) : 1'b0;
-assign conv_flag =  (in_row && in_count == 255)? ((!conv_col && !conv_row)? 1 : (r_count == 9)) : 0;
+// assign conv_flag =  (in_row && in_count == 255)? ((!conv_col && !conv_row)? 1 : (r_count == 8)) : 0;
+always_comb begin
+    case (state)
+        INPUT:      conv_flag = (in_row && in_count == 255);
+        INPUT_10:   conv_flag = (r_count == 8);
+        default:    conv_flag = 0;
+    endcase
+end
 always_comb begin
     in_row_n = in_row;
     conv_row_n = conv_row;
     in_col_n = in_col;
     conv_col_n = conv_col;
 
-    if (state == INPUT) begin
+    if (state == INPUT || state == INPUT_10) begin
 
         if (in_count == 256) begin
             if (!in_row || (in_row == 1 && in_col == 0)) begin

@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 
 `include "pattern_dwconv.sv"
-`include "sram_16x90880_simple.sv"
+`include "sram_16x90881_simple.sv"
 // 2. 根據模擬類型 (RTL vs. GATE) 包含 DUT 原始碼
 `ifdef RTL
     `define PATTERN_NUM 5721857

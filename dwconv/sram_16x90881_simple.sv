@@ -1,8 +1,8 @@
-// sram_16x90880_simple.sv
-module sram_16x90880_simple #(
+// sram_16x90881_simple.sv
+module sram_16x90881_simple #(
   parameter int DW    = 16,
-  parameter int DEPTH = 90880,
-  parameter int AW    = 17   // ceil(log2(90880))
+  parameter int DEPTH = 90881,
+  parameter int AW    = 17   // ceil(log2(90881))
 )(
   input  logic             clk,
   input  logic             rst_n,
@@ -15,8 +15,12 @@ module sram_16x90880_simple #(
 
   // Memory array (RTL behavioral model)
   logic [DW-1:0] mem [0:DEPTH-1];
-  logic [DW-1:0] mem176;
+  logic [DW-1:0] mem173, mem174, mem176, mem177, mem532;
+  assign mem173 = mem[173];
+  assign mem174 = mem[174];
+  assign mem177 = mem[177];
   assign mem176 = mem[176];
+  assign mem532 = mem[532];
 
   // Registered address for sync read
   logic [AW-1:0] A_q;

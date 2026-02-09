@@ -189,7 +189,7 @@ HSP_GCC_VERSION=7.3.0
 MGC_LOCATION_MAP=NO_MAP
 QTINC=/usr/lib64/qt-3.3/include
 LC_ALL=C
-SNPS_VCS_INTERNAL_ROOT_PID=195278
+SNPS_VCS_INTERNAL_ROOT_PID=221383
 QT_GRAPHICSSYSTEM_CHECKED=1
 IMSETTINGS_MODULE=none
 SPAPI_AHDL_INCLUDE=/RAID2/cad/synopsys/hspice/2020.03-sp2-2/hspice/include
@@ -218,7 +218,7 @@ VC_STATIC_HOME=/usr/cad/synopsys/vc_formal/cur/
 MAIL=/var/spool/mail/ea25vlsiintro056
 PATH=.:/RAID2/cad/MATLAB/bin/:/opt/btop/bin/:/RAID2/cad/Xilinx/Vivado/2020.2/bin:/RAID2/eda/jasper_2021.03//bin:/usr/cad/synopsys/cosmos_scope/cur/ai_bin:/usr/cad/synopsys/spyglass/2023.03//SPYGLASS_HOME/bin:/usr/cad/synopsys/icc/2022.03/amd64/syn/bin:/usr/cad/synopsys/primetime/2019.03-sp5-1//amd64/syn/bin:/usr/cad/synopsys/fc/2022.03/bin:/usr/cad/synopsys/lc/2022.03/bin:/usr/cad/synopsys/vc_formal/cur/bin:/usr/cad/synopsys/vcs/2022.06/amd64/bin:/usr/cad/synopsys/verdi/2019.06//bin:/usr/cad/synopsys/synthesis/2022.03/amd64/syn/bin:/cad/synopsys/lc/cur/bin:/usr/cad/cadence/SPECTRE/SPECTRE_19.10.322//tools/bin/64bit:/usr/cad/cadence/SPECTRE/SPECTRE_19.10.322//tools/dfII/bin/64bit:/usr/cad/cadence/SPECTRE/SPECTRE_19.10.322//tools/bin:/usr/cad/cadence/SPECTRE/SPECTRE_19.10.322//tools/dfII/bin:/usr/cad/cadence/SSV/SSV_21.12.000//tools/bin/64bit:/usr/cad/cadence/SSV/SSV_21.12.000//tools/bin:/usr/cad/cadence/QUANTUS/QUANTUS_21.11.000//tools/bin/64bit:/usr/cad/cadence/QUANTUS/QUANTUS_21.11.000//tools/bin:/usr/cad/cadence/PEGASUS/PEGASUS_21.20.000//tools/bin/64bit:/usr/cad/cadence/PEGASUS/PEGASUS_21.20.000//tools/bin:/usr/cad/cadence/JASPER/jasper_2023.09p001/bin:/usr/cad/cadence/INNOVUS/INNOVUS_20.15.000/tools/bin/64bit:/usr/cad/cadence/INNOVUS/INNOVUS_20.15.000/tools/bin:/usr/cad/cadence/INCISIV/INCISIVE_15.20.084/tools/bin/64bit:/usr/cad/cadence/INCISIV/INCISIVE_15.20.084/tools/bin:/usr/cad/cadence/XCELIUM/XCELIUM_22.03.003/tools/bin/64bit:/usr/cad/cadence/XCELIUM/XCELIUM_22.03.003/tools/bin:/usr/cad/cadence/GENUS/GENUS_20.10.000/tools/bin/64bit:/usr/cad/cadence/GENUS/GENUS_20.10.000/tools/bin:/usr/cad/mentor/Tessent/cur/bin:/usr/cad/mentor/calibre/aoi_cal_2019.2_26.18//bin:/usr/cad/synopsys/laker_oa/2021.06//bin:/usr/cad/synopsys/customexplorer/2022.06//bin:/usr/cad/synopsys/customcompiler/2020.12-sp1-2//bin:/usr/cad/synopsys/customcompiler/2020.12-sp1-2//primewave/bin:/usr/cad/synopsys/siliconsmart/2022.12/bin:/usr/cad/synopsys/xa/2022.06//bin:/usr/cad/synopsys/finesim/2022.06//bin:/RAID2/cad/synopsys/hspice/2020.03-sp2-2/hspice/bin:/RAID2/cad/synopsys/hspice/2020.03-sp2-2/hspice/GNU/linux64/gcc/bin:/RAID2/cad/synopsys/hspice/2020.03-sp2-2/hspice/linux64:/usr/bin:/usr/ucb/bin:/usr/cad/synopsys/hspice/2020.03-sp2-2//hspice/bin:/usr/cad/cadence/LIBERATE/LIBREATE_21.72.187/tools.lnx86/bin/64bit:/usr/cad/cadence/LIBERATE/LIBREATE_21.72.187/tools.lnx86/bin:/usr/cad/cadence/IC/IC_06.18.250/tools/bin:/usr/cad/cadence/IC/IC_06.18.250/tools/dracula/bin:/usr/cad/cadence/IC/IC_06.18.250/tools/dfII/bin:/usr/cad/cadence/IC/IC_06.18.250/tools/bin/64bit:/usr/cad/cadence/IC/IC_06.18.250/tools/dracula/bin/64bit:/usr/cad/cadence/IC/IC_06.18.250/tools/dfII/bin/64bit:/usr/lib64/qt-3.3/bin:/sbin:/bin:/usr/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/.local/bin:/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/bin:/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/.local/bin:/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/bin:/usr/sbin/:/usr/sbin/:/RAID2/Tool/bin/
 QT_IM_MODULE=ibus
-SNPS_VCS_INTERNAL_CURR_PID=195278
+SNPS_VCS_INTERNAL_CURR_PID=221383
 CALIBRE_HOME=/usr/cad/mentor/calibre/aoi_cal_2019.2_26.18/
 VERDI_HOME=/usr/cad/synopsys/verdi/2019.06/
 PWD=/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/dwconv
@@ -240,7 +240,7 @@ SYNOPSYS=/usr/cad/synopsys/synthesis/cur/
 HISTCONTROL=ignoredups
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
 VCS_ARG_ADDED_FOR_TMP=1
-SNPS_VCS_TMPDIR=/tmp/vcs_20260207174002_195278
+SNPS_VCS_TMPDIR=/tmp/vcs_20260209145507_221383
 SHLVL=4
 HOME=/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056
 HSP_GCC=/RAID2/cad/synopsys/hspice/2020.03-sp2-2/hspice/GNU/linux64/gcc/bin/gcc -m64 
@@ -260,7 +260,7 @@ LOGNAME=ea25vlsiintro056
 MACHTYPE=x86_64
 QTLIB=/usr/lib64/qt-3.3/lib
 MGLS_LICENSE_FILE=1717@lshc
-SNPS_VCS_INTERNAL_ROOT_START_TIME=1770486002.138820869
+SNPS_VCS_INTERNAL_ROOT_START_TIME=1770648907.686895280
 DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-P8KeNRvqt6,guid=fd8f9aaffb8c29b448418e0e6986d028
 XDG_DATA_DIRS=/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
 UID=18956
@@ -291,8 +291,8 @@ argv[1]=+v2k
 argv[2]=+define+RTL
 argv[3]=+fsdb+no_flush_log
 292 profile - 100
-          CPU/Mem usage: 0.070 sys,  0.240 user,  269.02M mem
-293 Elapsed time:    0:00:00    Sun Feb  8 01:40:06 2026
+          CPU/Mem usage: 0.080 sys,  0.290 user,  269.01M mem
+293 Elapsed time:    0:00:01    Mon Feb  9 22:55:12 2026
 294 pliAppInit
 295 FSDB_GATE is set.
 296 FSDB_RTL is set.
@@ -329,27 +329,27 @@ argv[3]=+fsdb+no_flush_log
 327 *Verdi* : Enable +mda dumping.
 328 *Verdi* : End of traversing.
 329 pliAppHDL_DumpVarComplete traverse var: profile - 
-          CPU/Mem usage: 0.090 sys,  0.260 user,  372.90M mem
-                   incr: 0.010 sys,  0.020 user,  11.55M mem
-                   accu: 0.010 sys,  0.020 user,  11.55M mem
-              accu incr: 0.010 sys,  0.020 user,  11.55M mem
+          CPU/Mem usage: 0.100 sys,  0.330 user,  372.90M mem
+                   incr: 0.010 sys,  0.030 user,  11.56M mem
+                   accu: 0.010 sys,  0.030 user,  11.56M mem
+              accu incr: 0.010 sys,  0.030 user,  11.56M mem
 
-          Count usage: 91541 var,  91539 idcode,  67 callback
-                 incr: 91541 var,  91539 idcode,  67 callback
-                 accu: 91541 var,  91539 idcode,  67 callback
-            accu incr: 91541 var,  91539 idcode,  67 callback
-330 Elapsed time:    0:00:00    Sun Feb  8 01:40:06 2026
+          Count usage: 91563 var,  91561 idcode,  73 callback
+                 incr: 91563 var,  91561 idcode,  73 callback
+                 accu: 91563 var,  91561 idcode,  73 callback
+            accu incr: 91563 var,  91561 idcode,  73 callback
+330 Elapsed time:    0:00:01    Mon Feb  9 22:55:12 2026
 331 pliAppHDL_DumpVarComplete: profile - 
-          CPU/Mem usage: 0.090 sys,  0.270 user,  377.92M mem
-                   incr: 0.000 sys,  0.010 user,  5.02M mem
-                   accu: 0.010 sys,  0.030 user,  16.58M mem
-              accu incr: 0.000 sys,  0.010 user,  5.02M mem
+          CPU/Mem usage: 0.100 sys,  0.350 user,  377.92M mem
+                   incr: 0.000 sys,  0.020 user,  5.02M mem
+                   accu: 0.010 sys,  0.050 user,  16.58M mem
+              accu incr: 0.000 sys,  0.020 user,  5.02M mem
 
-          Count usage: 91541 var,  91539 idcode,  67 callback
+          Count usage: 91563 var,  91561 idcode,  73 callback
                  incr: 0 var,  0 idcode,  0 callback
-                 accu: 91541 var,  91539 idcode,  67 callback
+                 accu: 91563 var,  91561 idcode,  73 callback
             accu incr: 0 var,  0 idcode,  0 callback
-332 Elapsed time:    0:00:00    Sun Feb  8 01:40:06 2026
+332 Elapsed time:    0:00:01    Mon Feb  9 22:55:12 2026
 333 sps_call_fsdbDumpflush_vd_main at 1000000 : testbed_dwconv.sv(77)
 334 *Verdi* : Flush all FSDB Files at 1,000,000 ps.
 335 sps_call_fsdbDumpflush_vd_main at 2000000 : testbed_dwconv.sv(77)
@@ -3810,17 +3810,15 @@ argv[3]=+fsdb+no_flush_log
 3790 *Verdi* : Flush all FSDB Files at 1,729,000,000 ps.
 3791 sps_call_fsdbDumpflush_vd_main at 1730000000 : testbed_dwconv.sv(77)
 3792 *Verdi* : Flush all FSDB Files at 1,730,000,000 ps.
-3793 sps_call_fsdbDumpflush_vd_main at 1731000000 : testbed_dwconv.sv(77)
-3794 *Verdi* : Flush all FSDB Files at 1,731,000,000 ps.
-3795 End of simulation at 1731360000
-3796 Elapsed time:    0:00:29    Sun Feb  8 01:40:35 2026
-3797 Begin FSDB profile info:
-3798 FSDB Writer : bc1(370963) bcn(13622179) mtf/stf(0/1731)
-FSDB Writer elapsed time : flush(25.933552) io wait(0.000000) theadpool wait(0.000000) target functin(0.000000)
+3793 End of simulation at 1730710000
+3794 Elapsed time:    0:00:30    Mon Feb  9 22:55:41 2026
+3795 Begin FSDB profile info:
+3796 FSDB Writer : bc1(378933) bcn(16584844) mtf/stf(0/1730)
+FSDB Writer elapsed time : flush(25.992397) io wait(0.000000) theadpool wait(0.000000) target functin(0.000000)
 FSDB Writer cpu time : MT Compression : 0
-3799 End FSDB profile info
-3800 Parallel profile    -  Flush:1734 Expand:0 ProduceWait:0 ConsumerWait:0 BlockUsed:1
-3801                        ProduceTime:6.774758716 ConsumerTime:0.000000000 Buffer:64MB
-3802 SimExit
-3803 Elapsed time:    0:00:29    Sun Feb  8 01:40:35 2026
-3804 Sim process exit
+3797 End FSDB profile info
+3798 Parallel profile    -  Flush:1733 Expand:0 ProduceWait:0 ConsumerWait:0 BlockUsed:1
+3799                        ProduceTime:8.347926316 ConsumerTime:0.000000000 Buffer:64MB
+3800 SimExit
+3801 Elapsed time:    0:00:31    Mon Feb  9 22:55:42 2026
+3802 Sim process exit

@@ -122,7 +122,7 @@ module PATTERN (
         weight = 144'd0;    
         bias   = 16'd0;
 
-        repeat (90800) begin
+        repeat (90880) begin
             in_valid <= 1'b1;     // <--- 這裡改為 1
             in_data  <= 16'h0000; // 資料為 0
             
