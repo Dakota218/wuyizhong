@@ -9,8 +9,7 @@ module dwconv_channel (
     input logic [1:0] state_n,
     input logic [7:0] col,
     input logic [6:0] row,
-    input logic [7:0] in_col,
-    input logic [6:0] in_row,
+
     input logic [8:0] in_count,
     input logic [16:0] addr_cnt_n,
     // input logic [6:0] in_count,
@@ -90,8 +89,10 @@ always_comb begin
                     
                     logic [8:0] next_val_temp; // 宣告一個暫存變數方便理解
                     // next_val_temp = offset_cnt_reg + (in_count == 256 );///////
-                    next_val_temp = offset_cnt_reg + (in_count == 1 && r_count == 0 );
-
+                    // next_val_temp = offset_cnt_reg + (in_count == 1 && r_count == 0 );
+                    next_val_temp = offset_cnt_reg + (!(col == 1 && row == 0 ) && in_count == 256 && r_count == 8 );
+                    // next_val_temp = offset_cnt_reg + (in_count == 1 && r_count == ((col == 1 && row == 0)? 0 : 8));
+                    
                     if (next_val_temp == 355) begin
                         offset_cnt_n = 0;
                     end else begin
@@ -117,7 +118,7 @@ always_comb begin
 
     endcase
 end
-assign offset_cnt_reg_n = (r_count == 0 && base_addr == 0)? offset_cnt : offset_cnt_reg;
+assign offset_cnt_reg_n = (r_count == 0 && base_addr == 0)? ((offset_cnt == 354)? 0 : offset_cnt) : offset_cnt_reg;
 always_comb begin
     addr_temp = $signed({1'b0, base_addr_n}) + offset_cnt_n;
     case(state_t'(state_n))

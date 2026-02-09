@@ -43,8 +43,7 @@ dwconv_channel dw (
     .state_n (state_n),
     .col(conv_col),
     .row(conv_row),
-    .in_col(in_col),
-    .in_row(in_row),
+
     .in_count(in_count),
     .addr_cnt_n(addr_cnt_n),
     
@@ -78,7 +77,7 @@ always_comb begin
     endcase
 end
 // assign in_count_n = (in_count == 256)? 1 : in_count + (in_valid && state_n == INPUT);
-assign in_count_n = (in_count == 256)? (((conv_col == 1 || conv_col == 0)&& conv_row == 0)? 1 : ((r_count == 9)? 1 : in_count)): (in_count + (in_valid && (state_n == INPUT || state_n == INPUT_10)));
+assign in_count_n = (in_count == 256)? (((conv_col == 1 || conv_col == 0)&& conv_row == 0)? 1 : ((r_count == 8)? 1 : in_count)): (in_count + (in_valid && (state_n == INPUT || state_n == INPUT_10)));
 // assign start_conv_n = (in_row == 0 && in_col == 175 && in_count == 254)? 1'b1 : start_conv;
 // assign conv_flag = (in_row && in_count == 255)? !(in_row == 1 && in_col == 0) : 1'b0;
 assign conv_flag =  (in_row && in_count == 255)? ((!conv_col && !conv_row)? 1 : (r_count == 8)) : 0;
@@ -102,7 +101,7 @@ always_comb begin
                 in_row_n = (in_col == 175)? in_row + 1 : in_row;
                 in_col_n = (in_col == 175)? 0 : in_col + 1;           
             end else begin
-                if (r_count == 9) begin
+                if (r_count == 8) begin
                     in_row_n = (in_col == 175)? in_row + 1 : in_row;
                     in_col_n = (in_col == 175)? 0 : in_col + 1;  
                 end

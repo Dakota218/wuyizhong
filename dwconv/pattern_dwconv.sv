@@ -191,67 +191,6 @@ module PATTERN (
             in_valid <= 1'b0;
             $fclose(input_file);
         end
-        // // (E) 階段 2
-        // begin
-        //     integer weight_idx;   // 指向 tb_full_weight_ram 的 index (以 9 為步進)
-        //     integer bias_idx;     // 指向 tb_full_bias_ram 的 index (以 1 為步進)
-        //     integer status_in;
-        //     reg  signed [15:0] in_word;
-        //     integer k;
-
-        //     $display("階段 2: 啟動一拍一個 in_data + 9 weights + 1 bias 的激勵...");
-
-
-        //     weight_idx = 0; // 0 ~ TOTAL_RAM_SIZE-1, 每次 +9
-        //     bias_idx   = 0; // 0 ~ CHANNELS-1, 每次 +1
-
-        //     // 主迴圈：只要輸入檔案還有資料就繼續
-        //     while (!$feof(input_file)) begin
-        //         // 1. 讀一個 16-bit in_data
-        //         status_in = $fscanf(input_file, "%h", in_word);
-        //         if (status_in != 1) begin
-        //             $display("[%0t] PATTERN: [Active] $fscanf 失敗或檔案提早結束。", $time);
-        //             break;
-        //         end
-
-        //         // 2. 準備 in_data (在這裡只用低 16 bit，其餘清 0)
-        //         in_data <= '0;
-        //         in_data[15:0] <= in_word;
-
-        //         // 3. 準備 9 個 weight，concate 到 weight[0 +: 16], [16 +: 16], ... [128 +: 16]
-        //         weight <= '0;
-        //         for (k = 0; k < 9; k = k + 1) begin
-        //             weight[k*16 +: 16] <= tb_full_weight_ram[weight_idx + k];
-        //         end
-
-        //         // weight index 每次往後跳 9，跑完 2304 (=256*9) 就從頭開始
-        //         weight_idx = weight_idx + 9;
-        //         if (weight_idx >= TOTAL_RAM_SIZE) begin
-        //             weight_idx = 0;
-        //         end
-
-        //         // 4. 準備 bias，同樣只用低 16 bit，其餘清 0
-        //         bias <= '0;
-        //         bias <= tb_full_bias_ram[bias_idx];
-
-        //         // bias index 每次 +1，跑完 256 就從頭開始
-        //         bias_idx = bias_idx + 1;
-        //         if (bias_idx >= CHANNELS) begin
-        //             bias_idx = 0;
-        //         end
-
-        //         // 5. 驅動 in_valid
-        //         in_valid <= 1'b1;
-
-        //         @(negedge clk);
-        //     end
-
-
-        //     // (F) 檔案讀取完畢，清理
-        //     $display("[%0t] PATTERN: 輸入檔案 'tv_1_fc1_out_hex.txt' 讀取完畢。", $time);
-        //     in_valid     <= 1'b0;
-        //     $fclose(input_file);
-        // end
     end // 結束 initial (Stimulus)
 
     // =================================================================
@@ -265,62 +204,6 @@ module PATTERN (
         end
     end
 
-    // =================================================================
-    // 修正版：以「讀取結果」作為結束依據
-    // =================================================================
-    // always @(negedge clk) begin
-    //     if (rst_n == 1'b1 && out_valid) begin 
-    //         integer res;
-            
-    //         // 1. 嘗試讀取下一筆 Golden
-    //         res = $fscanf(golden_file, "%h", expected_sum);
-
-    //         // 2. 判斷讀取是否成功
-    //         if (res !== 1) begin
-    //             // =========================================================
-    //             // [關鍵修改] 
-    //             // 當 DUT 送出資料，但 Golden File 已經讀不到東西 (res != 1)
-    //             // 這代表 Golden File 已經比對完了。
-    //             // 我們直接把它當作「正常結束」，而不是錯誤。
-    //             // =========================================================
-    //             $display("-------------------------------------------------");
-    //             $display("[%0t] PATTERN: Golden File 已讀取完畢 (EOF)，停止模擬。", $time);
-                
-    //             if (error_count == 0) begin
-    //                 $display("    >> 恭喜! 所有測試皆通過! <<");
-    //             end else begin
-    //                 $display("    >> 測試失敗: 共發現 %0d 筆錯誤。 <<", error_count);
-    //             end
-    //             $display("-------------------------------------------------");
-                
-    //             $fclose(golden_file);
-    //             $finish; 
-                
-    //         end else begin
-    //             // 3. 讀取成功，進行正常比對
-    //             if (sum !== expected_sum) begin
-    //                 $display("[%0t] PATTERN: *** 比對錯誤 *** (Test #%0d)", $time, test_count);
-    //                 $display("    預期: Sum=%h (%d)", expected_sum, expected_sum);
-    //                 $display("    得到: Sum=%h (%d)", sum, sum);
-    //                 error_count <= error_count + 1;
-    //             end else begin
-    //                  // 可以在這裡把正確的 log 註解掉，版面比較乾淨
-    //                  // $display("\033[1;32m[%0t] PATTERN: *** 比對正確 *** (Test #%0d)\033[0m", $time, test_count);
-    //             end
-    //             test_count <= test_count + 1;
-
-    //             // 4. (雙重保險) 如果剛好該行後面沒有換行符號，這裡就會直接結束
-    //             if ($feof(golden_file)) begin
-    //                 $display("-------------------------------------------------");
-    //                 $display("[%0t] PATTERN: 偵測到 EOF (無換行)，停止模擬。", $time);
-    //                 if (error_count == 0) $display("    >> 恭喜! 所有測試皆通過! <<");
-    //                 else $display("    >> 測試失敗: 共發現 %0d 筆錯誤。 <<", error_count);
-    //                 $display("-------------------------------------------------");
-    //                 $finish;
-    //             end
-    //         end
-    //     end
-    // end
 
 // =================================================================
     // 結果檢查器：固定檢查 4096 筆
@@ -364,59 +247,6 @@ module PATTERN (
             end
         end
     end
-    // always @(negedge clk) begin
-    //     if (rst_n == 1'b1) begin 
-            
-    //         // 1. 檢查是否達到了 "終止條件"
-    //         // (黃金檔案已讀完 且 DUT 不再輸出)
-
-    //         // if (golden_file_is_done && !out_valid) begin
-    //         if(test_count>=4096)begin
-    //             $display("-------------------------------------------------");
-    //             $display("[%0t] PATTERN: 偵測到最後一筆輸出已比對完成。", $time);
-                
-    //             // 總結報告
-    //             if (error_count == 0) begin
-    //                 $display("    >> 恭喜! 所有 %0d 筆測試皆通過! <<", test_count);
-    //             end else begin
-    //                 $display("    >> 測試失敗: 共發現 %0d 筆錯誤。 <<", error_count);
-    //             end
-    //             $display("-------------------------------------------------");
-                
-    //             $fclose(golden_file);
-    //             $finish; // 結束模擬
-    //         end
-
-    //         // 2. 檢查 DUT 是否有有效輸出
-    //         if (out_valid) begin
-    //             if (golden_file_is_done) begin
-    //                 // 錯誤: 黃金檔案已讀完，但 DUT 仍有 "額外" 輸出
-    //                 $display("[%0t] PATTERN: 錯誤! DUT 產生了額外輸出, 但 'golden_file' 已讀完。", $time);
-    //                 error_count <= error_count + 1;
-    //             end else begin
-    //                 // 正常比對程序
-                    
-    //                 $fscanf(golden_file, "%h", expected_sum);
-    //                 if (sum !== expected_sum) begin
-    //                     $display("[%0t] PATTERN: *** 比對錯誤 *** (Test #%0d)", $time, test_count);
-    //                     $display("    預期: Sum=%h (%d)", expected_sum, expected_sum);
-    //                     $display("    得到: Sum=%h (%d)", sum, sum);
-    //                     error_count <= error_count + 1;
-    //                 end else begin
-    //                     $display("\033[1;32m[%0t] PATTERN: *** 比對正確 *** (Test #%0d)\033[0m", $time, test_count);
-    //                     $display("\033[1;32m    預期: Sum=%h (%d)\033[0m", expected_sum, expected_sum);
-    //                     $display("\033[1;32m    得到: Sum=%h (%d)\033[0m", sum, sum);
-    //                 end
-    //                 test_count <= test_count + 1;
-
-    //                 // [關鍵] 檢查 $fscanf 之後是否 "剛好" 到了檔案結尾
-    //                 if ($feof(golden_file)) begin
-    //                     $display("[%0t] PATTERN: 'golden_file' 偵測到 EOF。這是最後一筆比對。", $time);
-    //                     golden_file_is_done <= 1'b1; // 設定終止旗標
-    //                 end
-    //             end
-    //         end
-    //     end
-    // end
+    
 
 endmodule
