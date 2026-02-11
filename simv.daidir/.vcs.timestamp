@@ -35,12 +35,17 @@
 /usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/novas.tab
 /usr/cad/synopsys/verdi/2019.06//share/PLI/VCS/LINUX64/verdi.tab
 testbed_mixffn.sv
-71
+80
 mraarch=linux_64
 installdir=/RAID2/cad/synopsys/hspice/2020.03-sp2-2/hspice
 XLOCALEDIR=/usr/cad/synopsys/icc2/2021.06-sp5//etc/locale
-XDG_SESSION_ID=358576
+XDG_SESSION_ID=382018
 XDG_RUNTIME_DIR=/run/user/18956
+VSCODE_IPC_HOOK_CLI=/run/user/18956/vscode-ipc-9c8fe69f-065b-4a27-bdb5-4eec22123c4b.sock
+VSCODE_GIT_IPC_HANDLE=/run/user/18956/vscode-git-66d506353c.sock
+VSCODE_GIT_ASKPASS_NODE=/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/.vscode-server/cli/servers/Stable-ddc367ed5c8936efe395cffeec279b04ffd7db78/server/node
+VSCODE_GIT_ASKPASS_MAIN=/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/.vscode-server/cli/servers/Stable-ddc367ed5c8936efe395cffeec279b04ffd7db78/server/extensions/git/dist/askpass-main.js
+VSCODE_GIT_ASKPASS_EXTRA_ARGS=
 VMR_MODE_FLAG=64
 VERDI_HOME=/usr/cad/synopsys/verdi/2019.06/
 VENDOR=unknown
@@ -57,13 +62,16 @@ VCS_ARCH=linux64
 UNAME=/bin/uname
 TOOL_HOME=/usr/cad/synopsys/vcs/2022.06/linux64
 TMIARCH=RH_64
+TERM_PROGRAM_VERSION=1.98.2
+TERM_PROGRAM=vscode
 SYN_MAN_DIR=/usr/cad/synopsys/star-rcxt/2019.12-sp5-3//starrc/man
 SYNOPSYS_NCX_ROOT=/usr/cad/synopsys/star-rcxt/2019.12-sp5-3/
 SYNOPSYS_LC_ROOT=/cad/synopsys/lc/cur
 SYNOPSYS=/usr/cad/synopsys/synthesis/cur/
-SSH_TTY=/dev/pts/39
-SSH_CONNECTION=140.113.0.229 54802 140.113.228.28 415
-SSH_CLIENT=140.113.0.229 54802 415
+SSL_CERT_FILE=/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem
+SSL_CERT_DIR=/etc/pki/tls/certs
+SSH_CONNECTION=140.113.177.123 56567 140.113.228.28 415
+SSH_CLIENT=140.113.177.123 56567 415
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
 SPAPI_AHDL_INCLUDE=/RAID2/cad/synopsys/hspice/2020.03-sp2-2/hspice/include
 SNPS_VCS_CLANG_PATH=/usr/cad/synopsys/vcs/2022.06/linux64/clang
@@ -73,7 +81,6 @@ SNPS_64=1
 SHLIB_PATH=/usr/cad/synopsys/verdi/2019.06//etc/lib/libstdc++/LINUX64/:/usr/cad/synopsys/verdi/2019.06//share/PLI/lib/LINUX64/:/usr/cad/synopsys/verdi/2019.06//share/PLI/VCS/LINUX64/:
 SCRNAME=vcs
 SCRIPT_NAME=vcs
-REMOTEHOST=140.113.0.229
 QT_GRAPHICSSYSTEM_CHECKED=1
 QTLIB=/usr/lib64/qt-3.3/lib
 QTINC=/usr/lib64/qt-3.3/include
@@ -97,8 +104,10 @@ HSP_GCC_VERSION=7.3.0
 HSP_GCC=/RAID2/cad/synopsys/hspice/2020.03-sp2-2/hspice/GNU/linux64/gcc/bin/gcc -m64 
 HOSTTYPE=x86_64-linux
 GROUP=ea25vlsiintro
+GIT_ASKPASS=/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/.vscode-server/cli/servers/Stable-ddc367ed5c8936efe395cffeec279b04ffd7db78/server/extensions/git/dist/askpass.sh
 FINEWAVE_64=1
 FINESIM_64=1
+COLORTERM=truecolor
 CMIARCH=RH_64
 CDS_Netlisting_Mode=Analog
 CDS_LOAD_ENV=CSF
@@ -118,7 +127,7 @@ ARCH=linux64
 1769071531 dwconv_channel.sv
 1769071531 dwconv.sv
 1769071531 mixffn.sv
-1769071531 pattern_mixffn.sv
+1769097703 pattern_mixffn.sv
 1769071531 testbed_mixffn.sv
 1661464871 /usr/cad/synopsys/verdi/2019.06//share/PLI/VCS/LINUX64/verdi.tab
 1661464871 /usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/novas.tab
@@ -129,5 +138,5 @@ ARCH=linux64
 1654053489 /usr/cad/synopsys/vcs/2022.06/linux64/lib/libsnpsmalloc.so
 1654053565 /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvfs.so
 1661464871 /usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/pli.a
-1769092432 simv.daidir
+1770355468 simv.daidir
 -1 partitionlib

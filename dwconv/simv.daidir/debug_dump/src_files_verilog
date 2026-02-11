@@ -1,4 +1,5 @@
-/RAID2/LAB/icssl/icsslRA21/Mix_ffn/dwconv/dwconv.sv
-/RAID2/LAB/icssl/icsslRA21/Mix_ffn/dwconv/dwconv_channel.sv
-/RAID2/LAB/icssl/icsslRA21/Mix_ffn/dwconv/pattern_dwconv.sv
-/RAID2/LAB/icssl/icsslRA21/Mix_ffn/dwconv/testbed_dwconv.sv
+/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/dwconv/dwconv.sv
+/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/dwconv/dwconv_channel.sv
+/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/dwconv/pattern_dwconv.sv
+/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/dwconv/sram_16x90881_simple.sv
+/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/dwconv/testbed_dwconv.sv

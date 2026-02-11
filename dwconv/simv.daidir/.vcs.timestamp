@@ -1,7 +1,11 @@
 0 
-26
+36
 +define+RTL
++fsdb+no_flush_log
++itf+/usr/cad/synopsys/vcs/2022.06/linux64/lib/vcsdp_lite.tab
 +v2k
++vcsd1
++vpi
 -Mamsrun=
 -Masflags=
 -Mcc=gcc
@@ -12,19 +16,25 @@
 -Mcsrc=
 -Mexternalobj=
 -Mldflags= -rdynamic
--Mobjects= /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvirsim.so /usr/cad/synopsys/vcs/2022.06/linux64/lib/liberrorinf.so /usr/cad/synopsys/vcs/2022.06/linux64/lib/libsnpsmalloc.so /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvfs.so
+-Mobjects= /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvirsim.so /usr/cad/synopsys/vcs/2022.06/linux64/lib/liberrorinf.so /usr/cad/synopsys/vcs/2022.06/linux64/lib/libsnpsmalloc.so /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvfs.so /usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/pli.a
 -Mout=simv
 -Msaverestoreobj=/usr/cad/synopsys/vcs/2022.06/linux64/lib/vcs_save_restore_new.o
--Msyslibs=-ldl
+-Msyslibs=/usr/cad/synopsys/verdi/2019.06//share/PLI/VCS/LINUX64/pli.a -ldl -lm
 -Mvcsaceobjs=
 -Mxcflags= -pipe -fPIC -I/usr/cad/synopsys/vcs/2022.06/include
 -Mxllcflags=
+-P
+-P
 -Xvcs_run_simv=1
+-debug_access+all
+-fsdb
 -full64
 -gen_obj
 -picarchive
 -sverilog
 /usr/cad/synopsys/vcs/2022.06/linux64/bin/vcs1
+/usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/novas.tab
+/usr/cad/synopsys/verdi/2019.06//share/PLI/VCS/LINUX64/verdi.tab
 testbed_dwconv.sv
 90
 mraarch=linux_64
@@ -35,7 +45,7 @@ XRDP_PULSE_SOURCE_SOCKET=xrdp_chansrv_audio_in_socket_16
 XRDP_PULSE_SINK_SOCKET=xrdp_chansrv_audio_out_socket_16
 XMODIFIERS=@im=ibus
 XLOCALEDIR=/usr/cad/synopsys/icc2/2021.06-sp5//etc/locale
-XDG_SESSION_ID=c10
+XDG_SESSION_ID=c53
 XDG_RUNTIME_DIR=/run/user/18956
 XDG_MENU_PREFIX=gnome-
 XDG_DATA_DIRS=/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
@@ -63,14 +73,14 @@ SYNOPSYS_LC_ROOT=/cad/synopsys/lc/cur
 SYNOPSYS=/usr/cad/synopsys/synthesis/cur/
 SSH_AUTH_SOCK=/run/user/18956/keyring/ssh
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
-SSH_AGENT_PID=238794
+SSH_AGENT_PID=235533
 SPAPI_AHDL_INCLUDE=/RAID2/cad/synopsys/hspice/2020.03-sp2-2/hspice/include
 SNPS_VCS_CLANG_PATH=/usr/cad/synopsys/vcs/2022.06/linux64/clang
 SNPS_PLATFORM=linux64
 SNPS_INTERNAL_VCS_LINUX_OS=linux
 SNPS_64=1
 SHLIB_PATH=/usr/cad/synopsys/verdi/2019.06//etc/lib/libstdc++/LINUX64/:/usr/cad/synopsys/verdi/2019.06//share/PLI/lib/LINUX64/:/usr/cad/synopsys/verdi/2019.06//share/PLI/VCS/LINUX64/:
-SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/238793,unix/unix:/tmp/.ICE-unix/238793
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/235531,unix/unix:/tmp/.ICE-unix/235531
 SCRNAME=vcs
 SCRIPT_NAME=vcs
 QT_IM_MODULE=ibus
@@ -101,13 +111,13 @@ HSP_GCC=/RAID2/cad/synopsys/hspice/2020.03-sp2-2/hspice/GNU/linux64/gcc/bin/gcc 
 HOSTTYPE=x86_64-linux
 HISTCONTROL=ignoredups
 GROUP=ea25vlsiintro
-GNOME_TERMINAL_SERVICE=:1.104
-GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/997b761c_116c_4821_a0de_8edf85edbd1c
+GNOME_TERMINAL_SERVICE=:1.103
+GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/81a239c0_a70d_4578_be6f_e36c432a99f2
 GNOME_SHELL_SESSION_MODE=classic
 GNOME_DESKTOP_SESSION_ID=this-is-deprecated
 FINEWAVE_64=1
 FINESIM_64=1
-DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-rQBKEmzG0y,guid=21aacc2beac2985dbe7f9bf168e35e95
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-P8KeNRvqt6,guid=fd8f9aaffb8c29b448418e0e6986d028
 COLORTERM=truecolor
 CMIARCH=RH_64
 CDS_Netlisting_Mode=Analog
@@ -119,15 +129,20 @@ CALIBRE_HOME=/usr/cad/mentor/calibre/aoi_cal_2019.2_26.18/
 ARCH=linux64
 0
 0
-4
-1769070701 dwconv_channel.sv
-1769070701 dwconv.sv
-1769141681 pattern_dwconv.sv
-1769070701 testbed_dwconv.sv
-4
+8
+1770657194 dwconv_channel.sv
+1770657077 dwconv.sv
+1770640181 sram_16x90881_simple.sv
+1770656493 pattern_dwconv.sv
+1770656147 testbed_dwconv.sv
+1661464871 /usr/cad/synopsys/verdi/2019.06//share/PLI/VCS/LINUX64/verdi.tab
+1661464871 /usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/novas.tab
+1654052745 /usr/cad/synopsys/vcs/2022.06/linux64/lib/vcsdp_lite.tab
+5
 1654054205 /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvirsim.so
 1654053585 /usr/cad/synopsys/vcs/2022.06/linux64/lib/liberrorinf.so
 1654053489 /usr/cad/synopsys/vcs/2022.06/linux64/lib/libsnpsmalloc.so
 1654053565 /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvfs.so
-1769169661 simv.daidir
+1661464871 /usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/pli.a
+1770657208 simv.daidir
 -1 partitionlib

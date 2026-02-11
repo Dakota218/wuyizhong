@@ -2,11 +2,11 @@ Magic 271485
 Revision Verdi_P-2019.06
 
 ; Window Layout <x> <y> <width> <height> <signalwidth> <valuewidth>
-viewPort -1 27 1468 820 177 212
+viewPort -1 27 1468 820 177 208
 
 ; File list:
 ; openDirFile [-d delimiter] [-s time_offset] [-rf auto_bus_rule_file] path_name file_name
-openDirFile -d / "" "/RAID2/LAB/icssl/icsslRA21/Mix_ffn/dwconv/waves.fsdb"
+openDirFile -d / "" "/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/dwconv/waves.fsdb"
 
 ; file time scale:
 ; fileTimeScale ### s|ms|us|ns|ps
@@ -16,16 +16,16 @@ signalSpacing 5
 
 ; windowTimeUnit is used for zoom, cursor & marker
 ; waveform viewport range
-zoom 455664542.781250 455904965.901331
-cursor 455805000.000000
+zoom 1358620206.763322 1358836366.431291
+cursor 1361230000.000000
 marker 0.000000
 
 ; user define markers
 ; userMarker time_pos marker_name color linestyle
 ; visible top row signal index
-top 5
+top 0
 ; marker line index
-markerPos 44
+markerPos 39
 
 ; event list
 ; addEvent event_name event_expression
@@ -46,79 +46,51 @@ curSTATUS ByChange
 
 
 addGroup "G1"
-activeDirFile "" "/RAID2/LAB/icssl/icsslRA21/Mix_ffn/dwconv/waves.fsdb"
-addSignal -h 15 /TESTBED/I_DUT/clk
-addSignal -h 15 -holdScope rst_n
-addSignal -h 15 -UNSIGNED -holdScope state[1:0]
+activeDirFile "" "/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/dwconv/waves.fsdb"
+addSignal -h 15 /TESTBED/I_DUT/bias[15:0]
+addSignal -h 15 -holdScope clk
+addSignal -h 15 -2COMP -UDEC -holdScope in_data[15:0]
 addSignal -h 15 -holdScope in_valid
 addSignal -h 15 -holdScope out_valid
-addSignal -h 15 -2COMP -UDEC -holdScope sum[20:0]
-addSignal -h 15 -holdScope in_data[15:0]
-addSignal -h 15 -holdScope weight[143:0]
-addSignal -h 15 -UNSIGNED -UDEC -holdScope bias[15:0]
-addSignal -expanded -h 15 -UNSIGNED -UDEC /TESTBED/I_DUT/dw/bias_reg[0:1]
-addSignal -h 15 -UNSIGNED -UDEC -holdScope bias_reg[0][15:0]
-addSignal -h 15 -2COMP -UDEC -holdScope bias_reg[1][15:0]
+addSignal -h 15 -holdScope rst_n
+addSignal -h 15 -UNSIGNED -holdScope state[1:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope weight[143:0]
 addGroup "G2"
-addSignal -h 15 -UNSIGNED -UDEC /TESTBED/I_DUT/in_count[8:0]
-addSignal -h 15 -UNSIGNED -UDEC -holdScope conv_col[7:0]
+addSignal -h 15 -UNSIGNED -UDEC /TESTBED/I_DUT/conv_col[7:0]
+addSignal -h 15 -holdScope conv_flag
 addSignal -h 15 -UNSIGNED -UDEC -holdScope conv_row[6:0]
 addSignal -h 15 -UNSIGNED -UDEC -holdScope in_col[7:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope in_count[8:0]
 addSignal -h 15 -UNSIGNED -UDEC -holdScope in_row[6:0]
 addGroup "G3"
-addSignal -h 15 -UNSIGNED -UDEC /TESTBED/I_DUT/dw/col_reg[7:0]
-addSignal -h 15 -UNSIGNED -UDEC -holdScope row_reg[6:0]
-addSignal -h 15 /TESTBED/I_DUT/conv_flag
-addSignal -h 15 -holdScope conv_col_n[7:0]
+addSignal -h 15 -UNSIGNED -UDEC /TESTBED/I_DUT/dw/addr[18:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope addr_cnt[16:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope memory_ptr[18:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope r_count[3:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope memory_ptr_n[18:0]
 addGroup "G4"
-addSignal -h 15 -2COMP -UDEC /TESTBED/I_DUT/dw/in_data_0[15:0]
-addSignal -h 15 -2COMP -UDEC -holdScope in_data_1[15:0]
-addSignal -h 15 -2COMP -UDEC -holdScope in_data_2[15:0]
-addSignal -h 15 -2COMP -UDEC -holdScope in_data_176[15:0]
-addSignal -h 15 -2COMP -UDEC -holdScope in_data_177[15:0]
-addSignal -h 15 -2COMP -UDEC -holdScope in_data_178[15:0]
-addSignal -h 15 -2COMP -UDEC -holdScope in_data_352[15:0]
-addSignal -h 15 -2COMP -UDEC -holdScope in_data_353[15:0]
-addSignal -h 15 -2COMP -UDEC -holdScope in_data_354[15:0]
+addSignal -h 15 -UNSIGNED -UDEC /TESTBED/I_DUT/dw/in_col[7:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope in_count[8:0]
 addGroup "G5"
-addSignal -expanded -h 15 -2COMP -UDEC /TESTBED/I_DUT/dw/weight_reg[0:8]
-addSignal -h 15 -2COMP -UDEC -holdScope weight_reg[0][15:0]
-addSignal -h 15 -2COMP -UDEC -holdScope weight_reg[1][15:0]
-addSignal -h 15 -2COMP -UDEC -holdScope weight_reg[2][15:0]
-addSignal -h 15 -2COMP -UDEC -holdScope weight_reg[3][15:0]
-addSignal -h 15 -2COMP -UDEC -holdScope weight_reg[4][15:0]
-addSignal -h 15 -2COMP -UDEC -holdScope weight_reg[5][15:0]
-addSignal -h 15 -2COMP -UDEC -holdScope weight_reg[6][15:0]
-addSignal -h 15 -2COMP -UDEC -holdScope weight_reg[7][15:0]
-addSignal -h 15 -2COMP -UDEC -holdScope weight_reg[8][15:0]
+addSignal -h 15 -UNSIGNED -UDEC /TESTBED/I_DUT/dw/base_addr[16:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope offset_cnt[8:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope offset_cnt_reg[8:0]
 addGroup "G6"
-addSignal -expanded -h 15 -2COMP -UDEC /TESTBED/I_DUT/dw/mul[0:8]
-addSignal -h 15 -2COMP -UDEC -holdScope mul[0][31:0]
-addSignal -h 15 -2COMP -UDEC -holdScope mul[1][31:0]
-addSignal -h 15 -2COMP -UDEC -holdScope mul[2][31:0]
-addSignal -h 15 -2COMP -UDEC -holdScope mul[3][31:0]
-addSignal -h 15 -2COMP -UDEC -holdScope mul[4][31:0]
-addSignal -h 15 -2COMP -UDEC -holdScope mul[5][31:0]
-addSignal -h 15 -2COMP -UDEC -holdScope mul[6][31:0]
-addSignal -h 15 -2COMP -UDEC -holdScope mul[7][31:0]
-addSignal -h 15 -2COMP -UDEC -holdScope mul[8][31:0]
-addSignal -expanded -h 15 -2COMP -UDEC -holdScope mul_closed[0:8]
-addSignal -h 15 -2COMP -UDEC -holdScope mul_closed[0][31:0]
-addSignal -h 15 -2COMP -UDEC -holdScope mul_closed[1][31:0]
-addSignal -h 15 -2COMP -UDEC -holdScope mul_closed[2][31:0]
-addSignal -h 15 -2COMP -UDEC -holdScope mul_closed[3][31:0]
-addSignal -h 15 -2COMP -UDEC -holdScope mul_closed[4][31:0]
-addSignal -h 15 -2COMP -UDEC -holdScope mul_closed[5][31:0]
-addSignal -h 15 -2COMP -UDEC -holdScope mul_closed[6][31:0]
-addSignal -h 15 -2COMP -UDEC -holdScope mul_closed[7][31:0]
-addSignal -h 15 -2COMP -UDEC -holdScope mul_closed[8][31:0]
+addSignal -expanded -h 15 -UNSIGNED -HEX /TESTBED/I_DUT/dw/in_data_reg[0:8]
+addSignal -h 15 -2COMP -UDEC -holdScope in_data_reg[0][15:0]
+addSignal -h 15 -2COMP -UDEC -holdScope in_data_reg[1][15:0]
+addSignal -h 15 -2COMP -UDEC -holdScope in_data_reg[2][15:0]
+addSignal -h 15 -2COMP -UDEC -holdScope in_data_reg[3][15:0]
+addSignal -h 15 -2COMP -UDEC -holdScope in_data_reg[4][15:0]
+addSignal -h 15 -2COMP -UDEC -holdScope in_data_reg[5][15:0]
+addSignal -h 15 -2COMP -UDEC -holdScope in_data_reg[6][15:0]
+addSignal -h 15 -2COMP -UDEC -holdScope in_data_reg[7][15:0]
+addSignal -h 15 -2COMP -UDEC -holdScope in_data_reg[8][15:0]
 addGroup "G7"
-addSignal -h 15 -2COMP -UDEC /TESTBED/I_DUT/dw/bias_extended[31:0]
-addGroup "G8"
 
 ; getSignalForm Scope Hierarchy Status
 ; active file of getSignalForm
-activeDirFile "" "/RAID2/LAB/icssl/icsslRA21/Mix_ffn/dwconv/waves.fsdb"
+activeDirFile "" "/RAID2/COURSE/2025_Fall/ea25vlsiintro/ea25vlsiintro056/wuyizhong/dwconv/waves.fsdb"
 
 GETSIGNALFORM_SCOPE_HIERARCHY_BEGIN
 getSignalForm close
@@ -130,7 +102,6 @@ getSignalForm close
 SCOPE_LIST_BEGIN
 "/TESTBED"
 "/TESTBED/I_DUT"
-"/TESTBED/I_PATTERN"
 SCOPE_LIST_END
 
 GETSIGNALFORM_SCOPE_HIERARCHY_END
