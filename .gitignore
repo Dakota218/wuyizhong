@@ -1,0 +1,9 @@
+# syn outputs
+dwconv/*.ddc
+dwconv/*.sdf
+dwconv/*_syn.v
+dwconv/*_syn.*
+# synthesis outputs
+/dwconv/*.ddc
+/dwconv/*.sdf
+/dwconv/*_syn.v

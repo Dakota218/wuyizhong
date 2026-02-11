@@ -16,13 +16,12 @@ logic signed [8:0] weight_reg;
 logic signed [10:0] bias_reg;
 
 assign bias_extended = {bias_reg, 8'b0} ;
+assign mul = in_data_reg * weight_reg;
 always_comb begin
     if(in_count < 65)begin
         sum_n = sum + mul_reg;
-        mul = in_data_reg * weight_reg;
     end else if(in_count == 65)begin
         sum_n = sum + bias_extended; 
-        mul = 0;
     end else if(in_count == 66)begin
         sum_n = sum>>>8;
         if(sum[7])begin
@@ -30,13 +29,8 @@ always_comb begin
                 sum_n = (sum>>>8) + 1;
             end
         end
-        mul = 0;
-    end else if(in_count == 67)begin
-        sum_n = sum;
-        mul = 0;
     end else begin
         sum_n = 0;
-        mul = 0;
     end
 end
 

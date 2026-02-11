@@ -1,8 +1,8 @@
 module SR_CONV_CHANNEL (
     input clk,
     input rst_n,
-    input logic [15:0] weight,
-    input logic [15:0] bias,
+    input logic [8:0] weight,
+    input logic [11:0] bias,
     input  logic [15:0] in_data,
     input in_valid,
     output logic [15:0] out_data,
@@ -12,8 +12,10 @@ logic out_valid_n;
 logic [15:0] out_data_n;
 logic signed[24:0] mul,mul_n;
 logic signed[24:0] sum[0:21],sum_n[0:21];
-logic signed [23:0] bias_extended;
-logic signed[15:0] in_data_reg, bias_reg, weight_reg;
+logic signed [19:0] bias_extended;
+logic signed[15:0] in_data_reg;
+logic signed[8:0] weight_reg;
+logic signed[11:0] bias_reg;
 logic [7:0] in_count, in_count_n;
 logic [8:0] row_count, row_count_n;
 logic [8:0] col_count_8, col_count_8_n;

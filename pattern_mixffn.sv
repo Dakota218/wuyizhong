@@ -10,6 +10,7 @@ module PATTERN (
     output logic             in_valid_dwconv,
     output logic             in_valid_gelu,
     output logic             in_valid_fc2,
+    output logic             reset_ram_valid,
     output logic signed [9:0] in_data,
     output logic signed [15:0] bias,
     output logic signed [143:0] weight_conv, // 256 * 16 * 9 = 36864 bit
@@ -56,6 +57,7 @@ module PATTERN (
     integer j; 
     logic [15:0]total_cycle_count = 0;
     logic golden_file_is_done = 1'b0;
+    integer reset_cycle_count = 0;
 
     // =================================================================
     // 激勵產生 (Stimulus Driver) - 單一主控制器
@@ -66,6 +68,7 @@ module PATTERN (
         // (A) 初始化所有輸出
         in_valid_fc1     = 1'b0;
         in_data      = 16'h0000;
+        reset_ram_valid = 0;
         weight_fc1       = 4096'b0;
         weight_fc2       = 4096'b0;
         weight_conv       = 4096'b0;
@@ -168,6 +171,12 @@ module PATTERN (
                 ram_index = ram_index + 1;
                 weight_conv[ (j*16) +: 16 ] = tb_full_weight_ram_conv[ram_index];
             end*/
+            reset_ram_valid = 1;
+            while(reset_cycle_count < 90732)begin
+                in_data <= 0;
+                @(negedge clk);
+                reset_cycle_count = reset_cycle_count + 1;
+            end
             while (!$feof(input_file)) begin
                 //total_cycle_count = total_cycle_count + 1;
                 // --- 階段 A: Active (傳送 64 週期) ---
@@ -194,7 +203,7 @@ module PATTERN (
                     
                     // 4. 等待時脈
                     @(negedge clk);
-
+                    reset_cycle_count = reset_cycle_count + 1;
                     // 5. 更新狀態 (為下一個 *active* 週期準備)
                     active_cycle_count = active_cycle_count + 1;
                     cycle_offset = cycle_offset + 1; // 權重模式也推進
@@ -207,8 +216,16 @@ module PATTERN (
                 $display("[%0t] PATTERN: [Pause] 開始 191 週期暫停...", $time);
                 in_valid_fc1     <= 1'b0;
                 in_data  <= 0;
-                for (pause_cycle_count = 0; pause_cycle_count <= 191; pause_cycle_count = pause_cycle_count + 1) begin
-                    @(negedge clk);
+                if(reset_cycle_count>=136192)begin
+                    for (pause_cycle_count = 0; pause_cycle_count <= 2495; pause_cycle_count = pause_cycle_count + 1) begin
+                        @(negedge clk);
+                        reset_cycle_count = reset_cycle_count + 1;
+                    end
+                end else begin
+                    for (pause_cycle_count = 0; pause_cycle_count <= 191; pause_cycle_count = pause_cycle_count + 1) begin
+                        @(negedge clk);
+                        reset_cycle_count = reset_cycle_count + 1;
+                    end
                 end
             end
             // (F) 檔案讀取完畢，清理
@@ -246,14 +263,45 @@ module PATTERN (
         end 
     end
     
-    always@(*) begin         //如果是一次讀一個就用這個
-        static integer cycle_offset = 0; 
+    always@(*) begin      
+        integer weight_idx;
+        integer bias_idx;
+        integer total_sent_count;
+        integer k;
+
+        weight_idx = 0;
+        bias_idx   = 0;
+        total_sent_count = 0;
+        while (out_valid_fc1)begin
+            total_sent_count = total_sent_count + 1;
+
+            weight_conv <= '0;
+            for (k = 0; k < 9; k = k + 1) begin
+                weight_conv[k*16 +: 16] <= tb_full_weight_ram_conv[weight_idx + k];
+            end
+
+            bias <= tb_full_bias_ram[bias_idx];
+
+            // 索引遞增邏輯
+            weight_idx = (weight_idx + 9 >= TOTAL_RAM_SIZE) ? 0 : weight_idx + 9;
+            bias_idx   = (bias_idx + 1 >= CHANNELS) ? 0 : bias_idx + 1;
+
+            @(negedge clk); 
+            if (total_sent_count > 45312) begin
+                weight_conv   <= '0;
+                bias     <= 16'h0000;
+                repeat (8) begin
+                    @(negedge clk);
+                end
+            end
+        end
+        /*static integer cycle_offset = 0; 
         integer ram_index;
         integer bias_idx; 
         reg signed [15:0] read_data;
         in_valid_dwconv = 0;
         bias_idx   = 0;
-        while (out_valid_fc1) begin
+        while (out_valid_fc1 && reset_cycle_count >= 90880) begin
             //$display("[%0t] dwconv開始輸入", $time);
             @(negedge clk);
             in_valid_dwconv = 1;
@@ -271,7 +319,26 @@ module PATTERN (
             if (bias_idx >= CHANNELS) begin
                 bias_idx = 0;
             end
-        end 
+        end */
+        /*while (out_valid_fc1) begin
+            //$display("[%0t] dwconv開始輸入", $time);
+            @(negedge clk);
+            in_valid_dwconv = 1;
+            for (j = 0; j < 9; j = j + 1) begin
+                ram_index = (cycle_offset*9) + j;
+                weight_conv[ (j*16) +: 16 ] = tb_full_weight_ram_conv[ram_index];
+            end
+            cycle_offset = cycle_offset + 1;
+            if (cycle_offset == 256) begin
+                cycle_offset = 0; // 權重模式歸零
+            end
+            bias <= tb_full_bias_ram[bias_idx];
+            // bias index 每次 +1，跑完 256 就從頭開始
+            bias_idx = bias_idx + 1;
+            if (bias_idx >= CHANNELS) begin
+                bias_idx = 0;
+            end
+        end */
     end
     always@(*) begin
         in_valid_gelu = 0;
@@ -300,8 +367,8 @@ module PATTERN (
             // 1. 檢查是否達到了 "終止條件"
             // (黃金檔案已讀完 且 DUT 不再輸出)
 
-            if (golden_file_is_done) begin
-            //if(test_count>=2048)begin 
+            //if (golden_file_is_done) begin
+            if(test_count>=2048)begin 
                 $display("-------------------------------------------------");
                 $display("[%0t] PATTERN: 偵測到最後一筆輸出已比對完成。", $time);
                 

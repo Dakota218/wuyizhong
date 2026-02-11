@@ -49,7 +49,7 @@ CRT0=
 # C run time startup
 CRTN=
 # Machine specific libraries
-SYSLIBS=-ldl  -lc -lm -lpthread -ldl
+SYSLIBS=/usr/cad/synopsys/verdi/2019.06//share/PLI/VCS/LINUX64/pli.a -ldl -lm  -lc -lpthread -ldl
 
 # Default defines
 SHELL=/bin/sh
@@ -81,7 +81,7 @@ CFLAGS_O0+=$(STDLIB)
 LD_PARTIAL_LOADER=ld
 # Partial linking
 LD_PARTIAL=$(LD_PARTIAL_LOADER) -r -o
-LIBS=-lvirsim -lerrorinf -lsnpsmalloc -lvfs 
+LIBS=-lvirsim -lerrorinf -lsnpsmalloc -lvfs /usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/pli.a 
 # Note: if make gives you errors about include, either get gmake, or
 # replace the following line with the contents of the file filelist,
 # EACH TIME IT CHANGES

@@ -6,7 +6,7 @@ module dwconv (
     input logic [15:0] bias,
     input in_valid,
     output logic out_valid,
-    output logic [20:0] sum
+    output logic [15:0] sum
 );
 
 logic out_valid_n;
@@ -18,7 +18,7 @@ logic conv_flag;
 
 logic [7:0] out_count, out_count_n; // 8-bit (0-255)   
 logic [20:0] sum_temp[0:255], sum_temp_n[0:255];
-
+logic [20:0]sum_wire;
 typedef enum logic [1:0] {
     IDLE,
     INPUT,
@@ -41,9 +41,9 @@ dwconv_channel dw (
 
     .out_valid (out_valid),
     // .in_count(count[i]),
-    .sum (sum)
+    .sum (sum_wire)
 );
-
+assign sum = sum_wire;
 
 // always_comb begin
 //     for (int k=0; k<255; k=k+1) begin

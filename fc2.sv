@@ -13,6 +13,7 @@ logic signed [15:0] sum_n;
 logic out_valid_n;
 logic [8:0] in_count, in_count_n;   // 6-bit (0-63)
 logic [8:0] count[0:63], count_n[0:63]; /////////////////////////////////
+logic [3:0] pause_count, pause_count_n;
 
 logic [7:0] out_count, out_count_n; // 8-bit (0-255)
 localparam signed [7:0] bias [0:63] = '{
@@ -42,10 +43,12 @@ generate
             .rst_n (rst_n),
             .weight (weight[(8*i)+7:8*i]),
             .in_data (in_data),
+            .in_valid (in_valid),
             .out_valid (out_valid),
             .bias(bias[i]),
             .in_count(count[i]),
-            .sum (sum_wire[i])
+            .pause_count(pause_count),
+            .out_data (sum_wire[i])
         );    
     end
 endgenerate
@@ -53,7 +56,7 @@ endgenerate
 //assign sum_n = sum_temp[0]>>8;
 always_comb begin
     
-    if(in_count==260 )begin
+    if(in_count == 256 && pause_count == 3)begin
         for (int k=0;k<=63;k=k+1) begin
             sum_temp_n[k]=sum_wire[k];
         end
@@ -70,7 +73,7 @@ always_comb begin
     //state_n  = state;
     case (state)
         IDLE:  state_n = (in_valid)?        INPUT : state;
-        INPUT: state_n = (in_count == 260)?  OUTPUT : state;
+        INPUT: state_n = (in_count == 256 && pause_count == 3)?  OUTPUT : state;
         OUTPUT: state_n = (out_count == 64)? INPUT : state;
         default: state_n = IDLE;
 
@@ -91,6 +94,7 @@ always_comb begin
             in_count_n = 0;
             out_count_n = 0;
             out_valid_n = 0;
+            pause_count_n = 0;
             sum_n = 0;
             for (int j=0;j<64;j=j+1) begin
                 count_n[j]=0;
@@ -98,28 +102,47 @@ always_comb begin
         end
 
         INPUT: begin
-            if (in_count == 260) begin
-                out_valid_n = 0;
-                in_count_n = 5;
-                for (int j=0;j<64;j=j+1) begin
-                    count_n[j]=5;
+            if(pause_count == 9)begin
+                pause_count_n = 0;
+                if (in_count == 256) begin
+                    out_valid_n = 0;
+                    in_count_n = 1;
+                    for (int j=0;j<64;j=j+1) begin
+                        count_n[j]=1;
+                    end
+                end else begin
+                    in_count_n = in_count + 1;
+                    for (int j=0;j<64;j=j+1) begin
+                        count_n[j]=count[j]+1;
+                    end
                 end
             end else begin
-                in_count_n = in_count + 1;
-                for (int j=0;j<64;j=j+1) begin
-                    count_n[j]=count[j]+1;
-                end
-            end
+                pause_count_n = pause_count + 1;
+            end 
         end
 
         OUTPUT: begin
-            in_count_n = in_count + 1;
+            sum_n = sum_temp[0];
+            if(pause_count == 9)begin
+                pause_count_n = 0;
+                if (in_count == 256) begin
+                    for (int j=0;j<64;j=j+1) begin
+                        count_n[j] = 1;
+                    end
+                    in_count_n = 1;
+                end else begin
+                    for (int j=0;j<64;j=j+1) begin
+                        count_n[j]=count[j] + 1;
+                    end
+                    in_count_n = in_count + 1;
+                end
+            end else begin
+                pause_count_n = pause_count + 1;
+            end 
+            
             out_valid_n = 1'b1;
             out_count_n = out_count + 1;
-            sum_n = sum_temp[0];
-            for (int j=0;j<64;j=j+1) begin
-                count_n[j]=count[j] + 1;
-            end
+            
             if (out_count == 64) begin
                 out_count_n = 0;
                 out_valid_n = 0;
@@ -135,7 +158,7 @@ always_ff @(posedge clk or negedge rst_n) begin
         for (int j=0;j<64;j=j+1) begin
             count[j]<=0;
         end
-
+        pause_count <= 0;
         out_count <= 0;
         out_valid <= 1'b0; 
         sum<=0;
@@ -148,7 +171,7 @@ always_ff @(posedge clk or negedge rst_n) begin
         for (int j=0;j<64;j=j+1) begin
             count[j]<=count_n[j];
         end
-
+        pause_count <= pause_count_n;
         out_count <= out_count_n;
         out_valid <= out_valid_n;
         sum <= sum_n;

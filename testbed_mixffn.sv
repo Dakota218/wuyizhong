@@ -22,7 +22,7 @@
     `define SDF_INSTANCE I_DUT
 
     // 包含合成後的閘級網表 (Netlist)
-    `include "dwconv_syn.v"
+    `include "mixffn_syn.v"
     
 `else
     `define DUMP_FILE "mixffn_rtl.fsdb"
@@ -47,6 +47,7 @@ module TESTBED();
     logic             in_valid_fc2;
     logic             in_valid_dwconv;
     logic             in_valid_gelu;
+    logic             reset_ram_valid,
     logic signed [9:0] in_data;
     logic signed [15:0] bias;
     logic signed [143:0] weight_conv;
@@ -103,6 +104,7 @@ module TESTBED();
         .in_valid_dwconv(in_valid_dwconv),
         .in_valid_gelu(in_valid_gelu),
         .in_valid_fc2(in_valid_fc2),
+        .reset_ram_valid(reset_ram_valid),
         .in_data(in_data),
         .bias(bias),
         .weight_conv(weight_conv),
@@ -123,6 +125,7 @@ module TESTBED();
         .in_valid_dwconv(in_valid_dwconv),
         .in_valid_gelu(in_valid_gelu),
         .in_valid_fc2(in_valid_fc2),
+        .reset_ram_valid(reset_ram_valid),
         .in_data(in_data),
         .bias(bias),
         .weight_conv(weight_conv),
